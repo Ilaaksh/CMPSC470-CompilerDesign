@@ -1,0 +1,6 @@
+main()->void
+begin
+	if(AB>=b)
+		print x;
+    b = .3;      // number cannot starts from "."
+}

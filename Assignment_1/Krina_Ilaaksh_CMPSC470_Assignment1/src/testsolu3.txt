@@ -1,0 +1,11 @@
+<FUNC, token-attr:"func", 1:1>
+<ID, token-attr:"main", 1:6>
+<LPAREN, token-attr:"(", 1:10>
+<RPAREN, token-attr:")", 1:11>
+<BEGIN, token-attr:"{", 2:1>
+<ID, token-attr:"a", 3:5>
+<ASSIGN, token-attr:"<-", 3:7>
+<NUM, token-attr:"1", 3:10>
+<SEMI, token-attr:";", 3:11>
+<END, token-attr:"}", 4:1>
+Success!
