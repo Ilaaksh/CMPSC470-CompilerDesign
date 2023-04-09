@@ -1,0 +1,18 @@
+<ID, token-attr:"main", 1:1>
+<LPAREN, token-attr:"(", 1:5>
+<RPAREN, token-attr:")", 1:6>
+<FUNCRET, token-attr:"->", 1:7>
+<VOID, token-attr:"void", 1:9>
+<ID, token-attr:"begin", 2:1>
+<IF, token-attr:"if", 3:2>
+<LPAREN, token-attr:"(", 3:4>
+<ID, token-attr:"AB", 3:5>
+<RELOP, token-attr:">=", 3:7>
+<ID, token-attr:"b", 3:9>
+<RPAREN, token-attr:")", 3:10>
+<PRINT, token-attr:"print", 4:3>
+<ID, token-attr:"x", 4:9>
+<SEMI, token-attr:";", 4:10>
+<ID, token-attr:"b", 5:5>
+<RELOP, token-attr:"=", 5:7>
+Error! There is a lexical error at 5:9.

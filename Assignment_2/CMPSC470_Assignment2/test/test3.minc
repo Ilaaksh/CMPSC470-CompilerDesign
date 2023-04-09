@@ -1,0 +1,9 @@
+func main(
+{
+    a <- 1;
+    a <- a + 2;
+    b <- 3 + a;
+    c <- a + b;
+    3.14 [ ( <= it if ; ## nope it then
+    print c;
+}

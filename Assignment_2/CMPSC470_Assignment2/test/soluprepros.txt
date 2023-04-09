@@ -1,0 +1,19 @@
+
+
+
+
+<FUNC, 5:1> <<new symbol table entity [0, "main"]>><ID, attr:sym-id:0, 5:6> <BOOL, 5:11> <FUNCRET, 5:14> <VOID, 5:17>
+<BEGIN, 6:1>
+    <VAR, 7:5> <<new symbol table entity [1, "a"]>><ID, attr:sym-id:1, 7:9>  <INT, 7:12> <SEMI, 7:15>
+    <VAR, 8:5> <BOOL, 8:9>  <<new symbol table entity [2, "b"]>><ID, attr:sym-id:2, 8:13> <SEMI, 8:15>
+    <ID, attr:sym-id:1, 9:5> <ASSIGN, 9:7> <INT_VALUE, attr:"1", 9:10> <SEMI, 9:12>
+    <ID, attr:sym-id:1, 10:5> <ASSIGN, 10:7> <ID, attr:sym-id:2, 10:10>
+         <OP, attr:"+" , 11:10> <INT_VALUE, attr:"2", 11:12> <SEMI, 11:14>
+    <ID, attr:sym-id:1, 12:5> <ASSIGN, 12:7> <INT_VALUE, attr:"3", 12:10>
+         <OP, attr:"+" , 13:10> <ID, attr:sym-id:1, 13:12> <SEMI, 13:14> ##{ hello
+    <ID, attr:sym-id:2, 14:5> <ASSIGN, 14:7> <ID, attr:sym-id:1, 14:10> #{+ 4 ;
+    c <- a + b; ## hello
+    d <- b }#<OP, attr:"+" , 16:14> <FLOAT_VALUE, attr:"3.141592", 16:16> <SEMI, 16:18>
+    <PRINT, 17:5> <<new symbol table entity [3, "d"]>><ID, attr:sym-id:3, 17:11> <SEMI, 17:13>
+<END, 18:1>
+Lexical error: unexpected character '%' at 18:2.

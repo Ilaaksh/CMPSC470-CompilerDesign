@@ -1,0 +1,24 @@
+func main()->int
+{
+    var a int;
+    za <- 1;
+    za <- za + 2;
+    za <-  3 + za;
+    zb <- za +  4;
+    zc <- za + zb;
+    zd <- zb + zc;
+    ze <- zc + zd;
+    zf <- zd + ze;
+    {
+        zg <- ze + zf;
+        zh <- zf + zg;
+        zi <- zg + zh;
+        zj <- zh + zi;
+    }
+    zk <- zi + zj;
+    zl <- zj + zk;
+    zm <- zk + zl;
+    zn <- zl + zm;
+    3.141592 if else while bool int float  true false = != < > <= >= - * /  this line will be ignored ; ## test 1 2 3
+    print zn;
+}

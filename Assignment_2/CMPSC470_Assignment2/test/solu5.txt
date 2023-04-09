@@ -1,0 +1,15 @@
+<FUNC, 1:1> <<new symbol table entity [0, "mn"]>><ID, attr:sym-id:0, 1:6><LPAREN, 1:8><RPAREN, 1:9><FUNCRET, 1:10><INT, 1:12>
+<BEGIN, 2:1>
+    <<new symbol table entity [1, "a"]>><ID, attr:sym-id:1, 3:5> <ASSIGN, 3:7> <INT_VALUE, attr:"1", 3:10><SEMI, 3:11>
+    <<new symbol table entity [2, "b"]>><ID, attr:sym-id:2, 4:5> <ASSIGN, 4:7> <ID, attr:sym-id:1, 4:10>
+       <OP, attr:"+" , 5:8> <INT_VALUE, attr:"2", 5:10><SEMI, 5:11>
+    <<new symbol table entity [3, "c"]>><ID, attr:sym-id:3, 6:5> <ASSIGN, 6:7> <INT_VALUE, attr:"3", 6:10>
+       <OP, attr:"*" , 7:8> <ID, attr:sym-id:2, 7:10>
+       <OP, attr:"+" , 8:8> <FLOAT_VALUE, attr:"12.3", 8:10><SEMI, 8:14> ## hello
+#{
+    b := a + 4; / hello
+    c := a + b; ## hello
+}#
+    <PRINT, 13:5> <ID, attr:sym-id:3, 13:11><SEMI, 13:12>
+<END, 14:1> 
+Lexical error: unexpected character ':' at 14:3.

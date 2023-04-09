@@ -1,0 +1,17 @@
+func main ( bool ) -> void
+{
+    if ( a == 1 ) then
+        main <- 1;
+    else
+        main <- a + 2;
+    }
+    a <- 3 + a; ## hello
+    b <- a #{+ 4;
+    _c <- a + b; % hello
+    d <- b }#+ c;
+    print d;
+}
+
+ print  func  var  void  bool  int  float  struct  size  new  if  else  while  return  break  continue                              
+ {  }  (  )  [  ]  ;  ,  .  &  <-  ->
+ +  -  *  /  and  or  not  =  !=  <  >  <=  >=  true  false  #

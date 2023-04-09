@@ -1,0 +1,5 @@
+<FUNC, token-attr:"func", 1:1>
+<ID, token-attr:"main", 1:6>
+<BEGIN, token-attr:"{", 2:1>
+<END, token-attr:"}", 3:1>
+Success!

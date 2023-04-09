@@ -1,0 +1,6 @@
+func main()->int
+{
+    var bool a;
+    a <- 1;
+    print a;
+}

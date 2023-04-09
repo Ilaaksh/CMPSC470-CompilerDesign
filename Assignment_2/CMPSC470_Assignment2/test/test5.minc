@@ -1,0 +1,14 @@
+func mn()->int
+{
+    a <- 1;
+    b <- a
+       + 2;
+    c <- 3
+       * b
+       + 12.3; ## hello
+#{
+    b := a + 4; / hello
+    c := a + b; ## hello
+}#
+    print c;
+} :

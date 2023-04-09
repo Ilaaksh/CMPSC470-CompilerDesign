@@ -1,0 +1,18 @@
+#define aa int
+#define bb bool
+#define c 3.141592
+
+func main bb -> void
+{
+    var a  aa ;
+    var bb  b ;
+    a <- 1 ;
+    a <- b
+         + 2 ;
+    a <- 3
+         + a ; ##{ hello
+    b <- a #{+ 4 ;
+    c <- a + b; ## hello
+    d <- b }#+ c ;
+    print d ;
+}%
