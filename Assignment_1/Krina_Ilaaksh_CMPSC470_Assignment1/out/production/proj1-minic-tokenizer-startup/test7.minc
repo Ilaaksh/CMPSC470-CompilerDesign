@@ -1,8 +1,0 @@
-main()->void
-begin
-	if(a!=b_)
-		print x_12y_13x;
-    else
-        a = b / 2;
-    12_3a    // ID cannot start from '_'
-end

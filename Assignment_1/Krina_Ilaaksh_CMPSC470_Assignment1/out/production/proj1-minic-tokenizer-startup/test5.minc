@@ -1,5 +1,0 @@
-mai_n(
-{
-	a = a(1-2,3)
-    b = 3..;   // number cannot be "3."
-{

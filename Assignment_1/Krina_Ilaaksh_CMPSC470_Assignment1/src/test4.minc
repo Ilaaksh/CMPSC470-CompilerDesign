@@ -1,7 +1,0 @@
-func main()->int
-{
-    var int a;
-    a <- bcd + 2 * 3;
-    b <- 1.234
-    print a;
-}
