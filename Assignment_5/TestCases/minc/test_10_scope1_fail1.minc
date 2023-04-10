@@ -1,0 +1,23 @@
+func main(var int a,var int b)->int
+{
+    var bool a;         ## Since a is already defined as parameter of main() function, a cannot be defined as a new variable here
+    var int lb;
+    {
+        var bool a;     ## However, redefining a in a new composite_stmt is allowed
+        var bool b;
+        var bool ga;
+        ga <- true;
+        a <- true;
+        b <- true;
+    }
+    a <- true;
+    b <- 20;
+    ga <- 3;
+    gb <- 40;
+    gc <- true;
+    {
+        var bool la;
+        la <- true;
+    }
+    return 0;
+}

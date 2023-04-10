@@ -1,0 +1,2 @@
+Error: there is semantic error(s).
+[Error at 8:26] The 3rd argument of the function Func() should be bool type.

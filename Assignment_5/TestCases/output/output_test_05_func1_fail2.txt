@@ -1,0 +1,2 @@
+Error: there is semantic error(s).
+[Error at 12:3] The function Func() is already defined.

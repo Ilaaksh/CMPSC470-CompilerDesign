@@ -1,0 +1,29 @@
+func div (var int a,var int b)->int
+{
+    var int c;
+    if ( a < b )
+        c <- 0;
+    else
+        c <- call div(a - b, b) + 1;
+    return c;
+}
+
+func mod (var  int a, var int b)->int
+{
+    var int c;
+    if ( a < b )
+        c <- a;
+    else
+        c <- call mod(a - b, b);
+    return c;
+}
+
+func main()->int
+{
+    var int c;
+
+    print call div( 123 , 5 );
+    print call mod( 123 , 5 );
+
+    return 0;
+}

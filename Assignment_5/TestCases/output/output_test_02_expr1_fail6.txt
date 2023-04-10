@@ -1,0 +1,2 @@
+Error: there is semantic error(s).
+[Error at 6:18] Cannot use an undefined variable b.

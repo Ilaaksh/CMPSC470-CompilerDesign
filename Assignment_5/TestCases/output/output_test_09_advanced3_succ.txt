@@ -1,0 +1,64 @@
+Success: no semantic error is found.
+
+================================================================================
+Code with indentations:
+func Fib( var int n ) -> int
+{
+    if( n <= 1 )
+        return n;
+    else
+        return call Fib( n - 1 ) + call Fib( n - 2 );
+}
+func main() -> int
+{
+    var int fib;
+    fib <- call Fib( 10 );
+    print fib;
+    if( fib < 10 )
+        {
+            {
+                fib <- 1;
+            }
+        }
+    else
+        {
+            {
+                fib <- 0;
+            }
+        }
+    return fib;
+}
+================================================================================
+Code with indentations and comments for running environment:
+func Fib( var int n ) -> int
+## relative address of parameter n from this func call base pointer is -1
+{
+    if( n[-1] <= 1 )
+        return n[-1];
+    else
+        return call Fib( n[-1] - 1 ) + call Fib( n[-1] - 2 );
+}
+func main() -> int
+{
+    var int fib; ## relative address of local variable fib from this func call base pointer is 1
+    fib[1] <- call Fib( 10 );
+    print fib[1];
+    if( fib[1] < 10 )
+        {
+            {
+                fib[1] <- 1;
+            }
+        }
+    else
+        {
+            {
+                fib[1] <- 0;
+            }
+        }
+    return fib[1];
+}
+================================================================================
+Execute:
+55
+Returned value by main: 0
+================================================================================

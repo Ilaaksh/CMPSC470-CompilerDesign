@@ -1,0 +1,86 @@
+Success: no semantic error is found.
+
+================================================================================
+Code with indentations:
+func GCD( var int a, var int b ) -> int
+{
+    var int gcd;
+    if( a = 0 or b = 0 )
+        {
+            if( a = 0 )
+                gcd <- b;
+            else
+                gcd <- a;
+        }
+    else
+        {
+            {
+                var int mod;
+                if( a > b )
+                    gcd <- call GCD( a - b, b );
+                else
+                    gcd <- call GCD( b - a, a );
+            }
+        }
+    return gcd;
+}
+func main() -> int
+{
+    var int gcd;
+    gcd <- call GCD( 12, 4 );
+    print gcd;
+    gcd <- call GCD( 4, 12 );
+    print gcd;
+    gcd <- call GCD( 4, 7 );
+    print gcd;
+    gcd <- call GCD( 2 * 3 * 5 * 17 * 17, 17 * 4 * 9 * 10 );
+    print gcd;
+    return gcd;
+}
+================================================================================
+Code with indentations and comments for running environment:
+func GCD( var int a, var int b ) -> int
+## relative address of parameter a from this func call base pointer is -1
+## relative address of parameter b from this func call base pointer is -2
+{
+    var int gcd; ## relative address of local variable gcd from this func call base pointer is 1
+    if( a[-1] = 0 or b[-2] = 0 )
+        {
+            if( a[-1] = 0 )
+                gcd[1] <- b[-2];
+            else
+                gcd[1] <- a[-1];
+        }
+    else
+        {
+            {
+                var int mod; ## relative address of local variable mod from this func call base pointer is 2
+                if( a[-1] > b[-2] )
+                    gcd[1] <- call GCD( a[-1] - b[-2], b[-2] );
+                else
+                    gcd[1] <- call GCD( b[-2] - a[-1], a[-1] );
+            }
+        }
+    return gcd[1];
+}
+func main() -> int
+{
+    var int gcd; ## relative address of local variable gcd from this func call base pointer is 1
+    gcd[1] <- call GCD( 12, 4 );
+    print gcd[1];
+    gcd[1] <- call GCD( 4, 12 );
+    print gcd[1];
+    gcd[1] <- call GCD( 4, 7 );
+    print gcd[1];
+    gcd[1] <- call GCD( 2 * 3 * 5 * 17 * 17, 17 * 4 * 9 * 10 );
+    print gcd[1];
+    return gcd[1];
+}
+================================================================================
+Execute:
+4
+4
+1
+510
+Returned value by main: 510
+================================================================================

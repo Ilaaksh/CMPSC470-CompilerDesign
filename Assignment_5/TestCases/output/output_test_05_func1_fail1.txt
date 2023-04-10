@@ -1,0 +1,2 @@
+Error: there is semantic error(s).
+[Error at 3:1] The function Func() should return at least one int value.

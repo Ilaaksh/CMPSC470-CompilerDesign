@@ -1,0 +1,22 @@
+func main(var int a,var int b)->int
+{
+    var int la;
+    var int lb;
+    {
+        var bool a;
+        var bool b;
+        var bool ga;
+        ga <- true;
+        a <- true;
+        b <- true;
+    }
+    a <- 1;
+    b <- 20;
+    ga <- true;
+    gb <- 40;
+    {
+        var bool la;
+        la <- true;
+    }
+    return 0;
+}

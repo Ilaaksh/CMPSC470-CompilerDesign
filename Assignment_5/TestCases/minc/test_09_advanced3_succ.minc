@@ -1,0 +1,23 @@
+func Fib (var int  n)->int
+{
+    if( n <= 1 
+    )    return n;
+    else
+        return call Fib(n-1) + call Fib(n-2);
+}
+
+func main()->int
+{
+    var int fib;
+
+    fib <- call Fib(10);
+    print fib;
+
+    if( fib < 10 ){ {
+       fib <- 1;
+    } } else { {
+       fib <- 0;
+    } }
+
+    return fib;
+}

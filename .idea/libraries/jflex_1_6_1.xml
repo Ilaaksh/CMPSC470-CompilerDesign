@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jflex-1.6.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Assignment_2/CMPSC470_Assignment2/out/production/proj2-minic-lexer-startup/jflex-1.6.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
