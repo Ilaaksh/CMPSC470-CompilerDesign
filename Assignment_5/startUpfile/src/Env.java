@@ -6,13 +6,20 @@ import java.util.HashMap;
 public class Env
 {
     public Env prev;
+    private HashMap<String, Object> vars;
     public Env(Env prev)
     {
-
+        this.prev = prev;
+        this.vars = new HashMap<String,Object>();
     }
     public void Put(String name, Object value)
     {
-
+        map.put("print", "PRINT");
+        map.put("var"," VAR");
+        map.put("func", "FUNC");
+        map.put("if"," IF");
+        map.put("else", "ELSE");
+        map.put("while"," WHILE");
     }
     public Object Get(String name)
     {
