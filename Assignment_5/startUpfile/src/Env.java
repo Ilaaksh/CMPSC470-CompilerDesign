@@ -25,6 +25,15 @@ public class Env
         map.put(")", "RPAREN");
         map.put("->", "FUNCRET");
         map.put("<-", "ASSIGN");
+        map.put("+", "ADD");
+        map.put("-", "SUB");
+        map.put("*", "MUL");
+        map.put("/", "DIV");
+        map.put("%", "MOD");
+        map.put("<", "LT");
+        map.put(">", "GT");
+        map.put(">=", "GE");
+        map.put("<=", "LE");
         map.put("int", "INT");
         map.put("if"," IF");
         map.put("else", "ELSE");
