@@ -17,6 +17,15 @@ public class Env
         map.put("print", "PRINT");
         map.put("var"," VAR");
         map.put("func", "FUNC");
+        map.put("call", "CALL");
+        map.put("return", "RETURN");
+        map.put("{", "BEGIN");
+        map.put("}", "END");
+        map.put("(", "LPAREN");
+        map.put(")", "RPAREN");
+        map.put("->", "FUNCRET");
+        map.put("<-", "ASSIGN");
+        map.put("int", "INT");
         map.put("if"," IF");
         map.put("else", "ELSE");
         map.put("while"," WHILE");
