@@ -34,6 +34,8 @@ public class Env
         map.put(">", "GT");
         map.put(">=", "GE");
         map.put("<=", "LE");
+        map.put("=", "EQ");
+        map.put(";", "SEMI");
         map.put("int", "INT");
         map.put("if"," IF");
         map.put("else", "ELSE");
