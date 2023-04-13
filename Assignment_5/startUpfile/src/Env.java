@@ -53,12 +53,44 @@ public class Env
         // For the real implementation, I recommend to return a class object
         //   since the identifier's type can be variable or function
         //   whose detailed attributes will be different
+        
+        if(name.equals("print") == true) return "print";
+        if(name.equals("var") == true) return "var";
         if(name.equals("func") == true) return "func";
         if(name.equals("call") == true) return "call";
         if(name.equals("return") == true) return "return";
-        if(name.equals("var") == true) return "var";
+        
+        if(name.equals("{") == true) return "{";
+        if(name.equals("}") == true) return "}";
+        if(name.equals("(") == true) return "(";
+        if(name.equals(")") == true) return ")";
+        if(name.equals("->") == true) return "->";
+        
+        if(name.equals("<-") == true) return "<-";
+        if(name.equals("+") == true) return "+";
+        if(name.equals("-") == true) return "-";
+        if(name.equals("*") == true) return "*";
+        if(name.equals("/") == true) return "/";
+        if(name.equals("%") == true) return "%";
+        if(name.equals("<") == true) return "<";
+        if(name.equals(">") == true) return ">";
+        if(name.equals(">=") == true) return ">=";
+        if(name.equals("<=") == true) return "<=";
+        if(name.equals("=") == true) return "=";
+        if(name.equals(";") == true) return ";";
+        if(name.equals(",") == true) return ",";
+
         if(name.equals("if") == true) return "if";
         if(name.equals("else") == true) return "else";
+        if(name.equals("int") == true) return "int";
+        if(name.equals("and") == true) return "and";
+        if(name.equals("or") == true) return "or";
+        if(name.equals("not") == true) return "not";
+        if(name.equals("true") == true) return "true";
+        if(name.equals("false") == true) return "false";
+        if(name.equals("while") == true) return "while";
+       
+        
         return null;
     }
 }
