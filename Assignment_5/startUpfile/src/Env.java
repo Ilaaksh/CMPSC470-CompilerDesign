@@ -3,10 +3,54 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
+public abstract class Symbol {
+    private String name;
+
+    public Symbol(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+public class VariableSymbol extends Symbol {
+    private Type type;
+
+    public VariableSymbol(String name, Type type) {
+        super(name);
+        this.type = type;
+    }
+
+    public Type getType() {
+        return type;
+    }
+}
+
+public class FunctionSymbol extends Symbol {
+    private List<VariableSymbol> parameters;
+    private Type returnType;
+
+    public FunctionSymbol(String name, List<VariableSymbol> parameters, Type returnType) {
+        super(name);
+        this.parameters = parameters;
+        this.returnType = returnType;
+    }
+
+    public List<VariableSymbol> getParameters() {
+        return parameters;
+    }
+
+    public Type getReturnType() {
+        return returnType;
+    }
+}
+
 public class Env
 {
     public Env prev;
-    private HashMap<String, Object> vars;
+    private HashMap<Symbol, Object> vars;
     public Env(Env prev)
     {
         this.prev = prev;
