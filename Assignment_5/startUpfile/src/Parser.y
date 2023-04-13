@@ -44,59 +44,59 @@ import java.io.*;
 %%
 
 
-program         : decl_list                                     { Debug("program -> decl_list"                  ); $$ = program____decllist($1); }
+program         : decl_list                                     {  }
                 ;
 
-decl_list       : decl_list decl                                { Debug("decl_list -> decl_list decl"           ); $$ = decllist____decllist_decl($1,$2); }
-                |                                               { Debug("decl_list -> eps"                      ); $$ = decllist____eps          (     ); }
+decl_list       : decl_list decl                                {  }
+                |                                               {  }
                 ;
 
-decl            : fun_decl                                      { Debug("decl -> fun_decl"                      ); $$ = decl____fundecl($1); }
+decl            : fun_decl                                      {  }
                 ;
 
-prim_type       : INT                                           { Debug("prim_type -> INT"                      ); $$ = primtype____INT(); }
+prim_type       : INT                                           { }
                 ;
 
-type_spec       : prim_type                                     { Debug("type_spec -> prim_type"                ); $$ = typespec____primtype($1); }
+type_spec       : prim_type                                     {  }
                 ;
 
-fun_decl        : FUNC IDENT LPAREN params RPAREN FUNCRET prim_type BEGIN local_decls{ Debug("fun_decl -> FUNC ID(params)->prim_type BEGIN local_decls"); $<obj>$ = fundecl____FUNC_IDENT_LPAREN_params_RPAREN_FUNCRET_primtype_BEGIN_localdecls_10X_stmtlist_END($2, $4, $7, $9          ); }
-                                                                        stmt_list END{ Debug("                                           stmt_list END"); $$ =      fundecl____FUNC_IDENT_LPAREN_params_RPAREN_FUNCRET_primtype_BEGIN_localdecls_X10_stmtlist_END($2, $4, $7, $9, $11, $12); }
+fun_decl        : FUNC IDENT LPAREN params RPAREN FUNCRET prim_type BEGIN local_decls{ }
+                                                                        stmt_list END{  }
                 ;
 
-params          :                                               { Debug("params -> eps"                         ); $$ = params____eps(); }
+params          :                                               { }
                 ;
 
-stmt_list       : stmt_list stmt                                { Debug("stmt_list -> stmt_list stmt"           ); $$ = stmtlist____stmtlist_stmt($1, $2); }
-                |                                               { Debug("stmt_list -> eps"                      ); $$ = stmtlist____eps          (      ); }
+stmt_list       : stmt_list stmt                                { }
+                |                                               { }
                 ;
 
-stmt            : assign_stmt                                   { Debug("stmt -> assign_stmt"                   ); $$ = stmt____assignstmt  ($1); }
-                | return_stmt                                   { Debug("stmt -> return_stmt"                   ); $$ = stmt____returnstmt  ($1); }
+stmt            : assign_stmt                                   {  }
+                | return_stmt                                   {  }
                 ;
 
-assign_stmt     : IDENT ASSIGN expr SEMI                        { Debug("assign_stmt -> IDENT <- expr ;"        ); $$ = assignstmt____IDENT_ASSIGN_expr_SEMI($1,$2,$3); }
+assign_stmt     : IDENT ASSIGN expr SEMI                        {  }
                 ;
 
-return_stmt     : RETURN expr SEMI                              { Debug("return_stmt -> RETURN expr ;"          ); $$ = returnstmt____RETURN_expr_SEMI($2); }
+return_stmt     : RETURN expr SEMI                              {  }
                 ;
 
-local_decls     : local_decls  local_decl                       { Debug("local_decls -> local_decls local_decl" ); $$ = localdecls____localdecls_localdecl($1, $2); }
-                |                                               { Debug("local_decls -> eps"                    ); $$ = localdecls____eps(); }
+local_decls     : local_decls  local_decl                       {  }
+                |                                               {  }
                 ;
 
-local_decl      : VAR  type_spec  IDENT  SEMI                   { Debug("local_decl -> VAR type_spec IDENT SEMI"); $$ = localdecl____VAR_typespec_IDENT_SEMI($2, $3); }
+local_decl      : VAR  type_spec  IDENT  SEMI                   { }
                 ;
 
-args            :                                               { Debug("args -> eps"                           ); $$ = args____eps(); }
+args            :                                               {  }
                 ;
 
-expr            : expr ADD expr                                 { Debug("expr -> expr ADD expr"                 ); $$ = expr____expr_ADD_expr                ($1,$2,$3); }
-                | expr EQ  expr                                 { Debug("expr -> expr EQ  expr"                 ); $$ = expr____expr_EQ_expr                 ($1,$2,$3); }
-                | LPAREN expr RPAREN                            { Debug("expr -> LPAREN expr RPAREN"            ); $$ = expr____LPAREN_expr_RPAREN           ($1,$2,$3); }
-                | IDENT                                         { Debug("expr -> IDENT"                         ); $$ = expr____IDENT                        ($1      ); }
-                | INT_LIT                                       { Debug("expr -> INT_LIT"                       ); $$ = expr____INTLIT                       ($1      ); }
-                | CALL IDENT LPAREN args RPAREN                 { Debug("expr -> CALL IDENT LPAREN args RPAREN" ); $$ = expr____CALL_IDENT_LPAREN_args_RPAREN($2,$4   ); }
+expr            : expr ADD expr                                 { }
+                | expr EQ  expr                                 { }
+                | LPAREN expr RPAREN                            {  }
+                | IDENT                                         { }
+                | INT_LIT                                       {  }
+                | CALL IDENT LPAREN args RPAREN                 {  }
                 ;
 
 %%
