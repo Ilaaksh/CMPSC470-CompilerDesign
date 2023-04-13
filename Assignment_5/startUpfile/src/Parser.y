@@ -44,59 +44,59 @@ import java.io.*;
 %%
 
 
-program         : decl_list                                     {  }
+program         : decl_list                                     ({  })
                 ;
 
-decl_list       : decl_list decl                                {  }
-                |                                               {  }
+decl_list       : decl_list decl                                ({  })
+                |                                               ({  })
                 ;
 
-decl            : fun_decl                                      {  }
+decl            : fun_decl                                      ({  })
                 ;
 
-prim_type       : INT                                           { }
+prim_type       : INT                                           ({  })
                 ;
 
-type_spec       : prim_type                                     {  }
+type_spec       : prim_type                                      ({  })
                 ;
 
 fun_decl        : FUNC IDENT LPAREN params RPAREN FUNCRET prim_type BEGIN local_decls{ }
                                                                         stmt_list END{  }
                 ;
 
-params          :                                               { }
+params          :                                                ({  })
                 ;
 
-stmt_list       : stmt_list stmt                                { }
-                |                                               { }
+stmt_list       : stmt_list stmt                                 ({  })
+                |                                                ({  })
                 ;
 
-stmt            : assign_stmt                                   {  }
-                | return_stmt                                   {  }
+stmt            : assign_stmt                                    ({  })
+                | return_stmt                                   ({  })
                 ;
 
-assign_stmt     : IDENT ASSIGN expr SEMI                        {  }
+assign_stmt     : IDENT ASSIGN expr SEMI                         ({  })
                 ;
 
-return_stmt     : RETURN expr SEMI                              {  }
+return_stmt     : RETURN expr SEMI                               ({  })
                 ;
 
-local_decls     : local_decls  local_decl                       {  }
-                |                                               {  }
+local_decls     : local_decls  local_decl                        ({  })
+                |                                              ({  })
                 ;
 
-local_decl      : VAR  type_spec  IDENT  SEMI                   { }
+local_decl      : VAR  type_spec  IDENT  SEMI                   ({  })
                 ;
 
-args            :                                               {  }
+args            :                                                ({  })
                 ;
 
-expr            : expr ADD expr                                 { }
-                | expr EQ  expr                                 { }
-                | LPAREN expr RPAREN                            {  }
-                | IDENT                                         { }
-                | INT_LIT                                       {  }
-                | CALL IDENT LPAREN args RPAREN                 {  }
+expr            : expr ADD expr                                  ({  })
+                | expr EQ  expr                                  ({  })
+                | LPAREN expr RPAREN                           ({  })
+                | IDENT                                          ({  })
+                | INT_LIT                                        ({  })
+                | CALL IDENT LPAREN args RPAREN                  ({  })
                 ;
 
 %%
