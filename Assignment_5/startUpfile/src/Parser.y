@@ -13,6 +13,7 @@
 
 %{
 import java.io.*;
+import Lexer.flex;
 %}
 
 %right  ASSIGN
