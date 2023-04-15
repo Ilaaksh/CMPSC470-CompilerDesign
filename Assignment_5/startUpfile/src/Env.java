@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class Env
 {
     public Env prev;
-    private HashMap<Symbol, Object> vars;
+    private HashMap<String, Object> vars;
     public Env(Env prev)
     {
         this.prev = prev;
