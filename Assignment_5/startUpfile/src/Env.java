@@ -25,9 +25,9 @@ public class Env
             if (prevEnv.vars.containsKey(name)) {
                 return prevEnv.vars.get(name); // return the value
             }
-            prevEnv = preEnv.prev;
+            prevEnv = prevEnv.prev;
         }
-        
-        return value;
+
+        return null;
     }
 }
