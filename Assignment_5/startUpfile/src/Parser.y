@@ -13,7 +13,6 @@
 
 %{
 import java.io.*;
-import Lexer.flex;
 %}
 
 %right  ASSIGN
@@ -45,59 +44,97 @@ import Lexer.flex;
 %%
 
 
-program         : decl_list                                     {  }
+program         : decl_list {}
                 ;
 
-decl_list       : decl_list decl                                {  }
-                |                                               {  }
+decl_list       : decl_list decl {}
+                | {}
                 ;
 
-decl            : fun_decl                                      {  }
+decl            : fun_decl {}
                 ;
 
-prim_type       : INT                                           { }
+fun_decl        : FUNC IDENT LPAREN params RPAREN FUNCRET prim_type BEGIN local_decls stmt_list END {}
                 ;
 
-type_spec       : prim_type                                     {  }
+params          : param_list {}
+                | {}
                 ;
 
-fun_decl        : FUNC IDENT LPAREN params RPAREN FUNCRET prim_type BEGIN local_decls{ }
-                                                                        stmt_list END{  }
+param_list      : param_list  COMMA  param {}
+                | param {}
                 ;
 
-params          :                                               { }
+param           : VAR type_spec IDENT {}
                 ;
 
-stmt_list       : stmt_list stmt                                { }
-                |                                               { }
+type_spec       : prim_type {}
                 ;
 
-stmt            : assign_stmt                                   {  }
-                | return_stmt                                   {  }
+prim_type       : INT {}
+                | Bool {}
                 ;
 
-assign_stmt     : IDENT ASSIGN expr SEMI                        {  }
+local_decls     : local_decls  local_decl {}
+                | {}
                 ;
 
-return_stmt     : RETURN expr SEMI                              {  }
+local_decl      : VAR  type_spec  IDENT  SEMI {}
                 ;
 
-local_decls     : local_decls  local_decl                       {  }
-                |                                               {  }
+stmt_list       : stmt_list  stmt {}
+                | {}
                 ;
 
-local_decl      : VAR  type_spec  IDENT  SEMI                   { }
+stmt            : assign_stmt {}
+                |  print_stmt {}
+                |  return_stmt {}
+                |  if_stmt {} 
+                |  while_stmt {}
+                |  compound_stmt {}
                 ;
 
-args            :                                               {  }
+assign_stmt     :IDENT  ASSIGN  expr  SEMI {}
                 ;
 
-expr            : expr ADD expr                                 { }
-                | expr EQ  expr                                 { }
-                | LPAREN expr RPAREN                            {  }
-                | IDENT                                         { }
-                | INT_LIT                                       {  }
-                | CALL IDENT LPAREN args RPAREN                 {  }
+print_stmt      :PRINT  expr  SEMI {}
+                ;
+
+return_stmt     :RETURN  expr  SEMI {}
+                ;
+
+if_stmt         :IF  LPAREN  expr  RPAREN  stmt  ELSE  stmt {}
+                ;
+
+while_stmt      :WHILE  LPAREN  expr  RPAREN  stmt {}
+                ;
+
+compound_stmt   :BEGIN  local_decls  stmt_list  END {}
+                ;
+
+args            :arg_list {}
+                | {}
+                ;
+
+expr            :expr  ADD  expr {}
+                | expr  SUB  expr  {}
+                | expr  MUL  expr  {}
+                | expr  DIV  expr  {}
+                | expr  MOD  expr {}
+                |  expr  EQ   expr  {}
+                | expr  NE   expr  {}
+                | expr  LE   expr  {}
+                | expr  LT   expr  {}
+                | expr  GE   expr  {}
+                | expr  GT  expr  {}
+                |  expr  AND  expr {}
+                | expr  OR   expr  {}
+                | NOT  expr {}
+                |  LPAREN  expr  RPAREN {}
+                |  IDENT  {}
+                |  INT_LIT  {}
+                |  BOOL_LIT {}
+                |  CALL  IDENT  LPAREN  args  RPAREN {}
                 ;
 
 %%
