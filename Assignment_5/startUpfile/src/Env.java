@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class Env
 {
     public Env prev;
-    private HashMap<String, Object> vars;
+    public HashMap<String, Object> vars;
     public Env(Env prev)
     {
         this.prev = prev;
@@ -20,14 +20,19 @@ public class Env
     }
     public Object Get(String name)
     {
+        HashMap<String, Object> t1 = vars;
         Env prevEnv = this.prev;
-        while(prevEnv != null) {
-            if (prevEnv.vars.containsKey(name)) {
-                return prevEnv.vars.get(name); // return the value
+        while(!t1.containsKey(name)) {
+            if (prevEnv==null) {
+                return null;
+                // return the value
             }
-            prevEnv = prevEnv.prev;
+            else {
+                t1=prevEnv.vars;
+                prevEnv = prevEnv.prev;
+            }
         }
 
-        return null;
+        return t1.get(name);
     }
 }
