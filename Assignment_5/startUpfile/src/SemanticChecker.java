@@ -20,7 +20,7 @@ public class SemanticChecker {
          if(args.length == 0)
          args = new String[]
          {
-             "/home/ijm5304/Desktop/CMPSC470-CompilerDesign/Assignment_5/TestCases/minc/syntaxerr_01_main.minc"
+             "/home/ijm5304/Desktop/CMPSC470-CompilerDesign/Assignment_5/TestCases/minc/syntaxerr_05_func1.minc"
              
           };
 

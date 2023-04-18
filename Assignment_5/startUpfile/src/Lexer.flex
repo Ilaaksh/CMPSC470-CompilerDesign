@@ -12,6 +12,8 @@
 
 %class Lexer
 %byaccj
+%line
+%column
 
 %{
 
