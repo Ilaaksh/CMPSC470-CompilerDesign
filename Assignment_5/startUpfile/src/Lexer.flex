@@ -18,6 +18,8 @@
   public Parser   parser;
   public int      lineno;
   public int      column;
+  public int getLine(){return yyline+1;}
+  public int getCol(){return yycolumn+1;}
 
   public Lexer(java.io.Reader r, Parser parser) {
     this(r);

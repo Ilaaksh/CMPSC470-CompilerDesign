@@ -72,7 +72,7 @@ type_spec       : prim_type {}
                 ;
 
 prim_type       : INT {}
-                | Bool {}
+                | BOOL {}
                 ;
 
 local_decls     : local_decls  local_decl {}
@@ -115,6 +115,8 @@ compound_stmt   :BEGIN  local_decls  stmt_list  END {}
 args            :arg_list {}
                 | {}
                 ;
+arg_list       :arg_list  COMMA  expr  {}
+                | expr {}                
 
 expr            :expr  ADD  expr {}
                 | expr  SUB  expr  {}
@@ -156,10 +158,10 @@ expr            :expr  ADD  expr {}
 
 
     public void yyerror (String error) {
-        //System.out.println ("Error message for " + lexer.lineno+":"+lexer.column +" by Parser.yyerror(): " + error);
-        int last_token_lineno = 0;
-        int last_token_column = 0;
-        System.out.println ("Error message by Parser.yyerror() at near " + last_token_lineno+":"+last_token_column + ": " + error);
+            System.out.println ("Error message by Parser.yyerror() at near "  + lexer.getLine()+":"+lexer.getCol() +" by Parser.yyerror(): " + error);
+            int last_token_lineno = lexer.getLine();
+            int last_token_column = lexer.getCol();
+            //System.out.println ("Error message by Parser.yyerror() at near " + last_token_lineno+":"+last_token_column + ": " + error);
     }
 
 

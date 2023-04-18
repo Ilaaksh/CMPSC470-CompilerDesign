@@ -17,12 +17,12 @@ public class SemanticChecker {
         //  +"}\n"
         //  );
 
-        //  if(args.length == 0)
-        //  args = new String[]
-        //  {
-        //      "C:\\2019bFall-proj5-minc-SemanticChecker-startup\\sample\\minc\\"
-        //      +"test_01_main_succ.minc",
-        //  };
+         if(args.length == 0)
+         args = new String[]
+         {
+             "/home/ijm5304/Desktop/CMPSC470-CompilerDesign/Assignment_5/TestCases/minc/syntaxerr_01_main.minc"
+             
+          };
 
         if(args.length <= 0)
             return;
