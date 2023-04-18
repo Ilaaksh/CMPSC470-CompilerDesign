@@ -1,1 +1,1 @@
-java -jar jflex-1.6.1.jar Lexer.flex
+Project by Krina Patel and Ilaaksh Mishra
