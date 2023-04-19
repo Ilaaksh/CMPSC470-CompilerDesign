@@ -44,11 +44,11 @@ import java.io.*;
 %%
 
 
-program         : decl_list {}
+program         : decl_list {$$ = program_decllist($1);}
                 ;
 
-decl_list       : decl_list decl {}
-                | {}
+decl_list       : decl_list decl {$$ = decllist_decllist_decl($1,$2);}
+                | {$$ = decllist_eps ( );}
                 ;
 
 decl            : fun_decl {}
