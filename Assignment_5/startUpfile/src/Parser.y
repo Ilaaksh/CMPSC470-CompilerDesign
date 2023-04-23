@@ -44,14 +44,14 @@ import java.io.*;
 %%
 
 
-program         : decl_list {$$ = program_decllist($1);}
+program         : decl_list {Debug("program -> decl_list" ); $$ = program_decllist($1);}
                 ;
 
-decl_list       : decl_list decl {$$ = decllist_decllist_decl($1,$2);}
-                | {$$ = decllist_eps ( );}
+decl_list       : decl_list decl {Debug("decl_list -> decl_list decl"  ); $$ = decllist_decllist_decl($1,$2);}
+                | {Debug("decl_list -> eps" ); $$ = decllist_eps     (     );}
                 ;
 
-decl            : fun_decl {}
+decl            : fun_decl {Debug("decl -> fun_decl" ); $$ = decl_fundecl($1);}
                 ;
 
 fun_decl        : FUNC IDENT LPAREN params RPAREN FUNCRET prim_type BEGIN local_decls stmt_list END {}
