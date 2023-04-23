@@ -118,16 +118,16 @@ args            :arg_list {}
 arg_list       :arg_list  COMMA  expr  {}
                 | expr {}                
 
-expr            :expr  ADD  expr {}
-                | expr  SUB  expr  {}
-                | expr  MUL  expr  {}
-                | expr  DIV  expr  {}
-                | expr  MOD  expr {}
-                |  expr  EQ   expr  {}
-                | expr  NE   expr  {}
-                | expr  LE   expr  {}
-                | expr  LT   expr  {}
-                | expr  GE   expr  {}
+expr            :expr  ADD  expr {$$ = expr__expr_ADD_expr                ($1,$2,$3);}
+                | expr  SUB  expr  {$$ = expr__expr_SUB_expr                 ($1,$2,$3);}
+                | expr  MUL  expr  {$$ = expr__expr_MUL_expr                 ($1,$2,$3);}
+                | expr  DIV  expr  {$$ = expr__expr_DIV_expr                 ($1,$2,$3);}
+                | expr  MOD  expr {$$ = expr__expr_MOD_expr                 ($1,$2,$3);}
+                |  expr  EQ   expr  {$$ = expr__expr_EQ_expr                 ($1,$2,$3);}
+                | expr  NE   expr  {$$ = expr__expr_NE_expr                 ($1,$2,$3);}
+                | expr  LE   expr  {$$ = expr__expr_LE_expr                 ($1,$2,$3);}
+                | expr  LT   expr  {$$ = expr__expr_LT_expr                 ($1,$2,$3);}
+                | expr  GE   expr  {$$ = expr__expr_GE_expr                 ($1,$2,$3);}
                 | expr  GT  expr  {}
                 |  expr  AND  expr {}
                 | expr  OR   expr  {}

@@ -44,38 +44,38 @@ import java.io.*;
 %%
 
 
-program         : decl_list                                     { }
+program         : decl_list                                     { Debug("program -> decl_list"                  ); $$ = program____decllist($1); }
                 ;
 
-decl_list       : decl_list decl                                { }
-                |                                               {    }
+decl_list       : decl_list decl                                { Debug("decl_list -> decl_list decl"           ); $$ = decllist____decllist_decl($1,$2); }
+                |                                               { Debug("decl_list -> eps"                      ); $$ = decllist____eps          (     ); }
                 ;
 
-decl            : fun_decl                                      {  }
+decl            : fun_decl                                      { Debug("decl -> fun_decl"                      ); $$ = decl____fundecl($1); }
                 ;
 
-prim_type       : INT                                           {  }
+prim_type       : INT                                           { Debug("prim_type -> INT"                      ); $$ = primtype____INT(); }
                 ;
 
-type_spec       : prim_type                                     {  }
+type_spec       : prim_type                                     { Debug("type_spec -> prim_type"                ); $$ = typespec____primtype($1); }
                 ;
 
-fun_decl        : FUNC IDENT LPAREN params RPAREN FUNCRET prim_type BEGIN local_decls{   }
-                                                                        stmt_list END{  }
+fun_decl        : FUNC IDENT LPAREN params RPAREN FUNCRET prim_type BEGIN local_decls{ Debug("fun_decl -> FUNC ID(params)->prim_type BEGIN local_decls"); $<obj>$ = fundecl____FUNC_IDENT_LPAREN_params_RPAREN_FUNCRET_primtype_BEGIN_localdecls_10X_stmtlist_END($2, $4, $7, $9          ); }
+                                                                        stmt_list END{ Debug("                                           stmt_list END"); $$ =      fundecl____FUNC_IDENT_LPAREN_params_RPAREN_FUNCRET_primtype_BEGIN_localdecls_X10_stmtlist_END($2, $4, $7, $9, $11, $12); }
                 ;
 
-params          :                                               { }
+params          :                                               { Debug("params -> eps"                         ); $$ = params____eps(); }
                 ;
 
-stmt_list       : stmt_list stmt                                {  }
-                |                                               {  }
+stmt_list       : stmt_list stmt                                { Debug("stmt_list -> stmt_list stmt"           ); $$ = stmtlist____stmtlist_stmt($1, $2); }
+                |                                               { Debug("stmt_list -> eps"                      ); $$ = stmtlist____eps          (      ); }
                 ;
 
-stmt            : assign_stmt                                   {  }
-                | return_stmt                                   {  }
+stmt            : assign_stmt                                   { Debug("stmt -> assign_stmt"                   ); $$ = stmt____assignstmt  ($1); }
+                | return_stmt                                   { Debug("stmt -> return_stmt"                   ); $$ = stmt____returnstmt  ($1); }
                 ;
 
-assign_stmt     : IDENT ASSIGN expr SEMI                        { SIGN_expr_SEMI($1,$2,$3); }
+assign_stmt     : IDENT ASSIGN expr SEMI                        { Debug("assign_stmt -> IDENT <- expr ;"        ); $$ = assignstmt____IDENT_ASSIGN_expr_SEMI($1,$2,$3); }
                 ;
 
 return_stmt     : RETURN expr SEMI                              { Debug("return_stmt -> RETURN expr ;"          ); $$ = returnstmt____RETURN_expr_SEMI($2); }
