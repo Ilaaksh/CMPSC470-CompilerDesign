@@ -175,5 +175,230 @@ public class ParserImpl
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    Object expr____expr_ADD_expr(Object s1, Object s2, Object s3) throws Exception
+    {
+        // 1. check if expr1.value_type matches with the expr2.value_type
+        // 2. etc.
+        // 3. create and return node that has value_type
+        ParseTree.Expr expr1 = (ParseTree.Expr)s1;
+        Token          oper  = (Token         )s2;
+        ParseTree.Expr expr2 = (ParseTree.Expr)s3;
+        if(expr1.equals("+")
+                && (expr1 instanceof ParseTree.Expr)
+                )
+                {
+                    return "+";
+                } // ok
+            else if(expr2.equals("expr")
+                && (expr2 instanceof ParseTree.ExprCall)
+                && (env.Get(((ParseTree.ExprCall)expr2).ident).equals("func()->int"))
+                )
+            {
+            } // ok
+            else
+            {
+                throw new Exception("semantic error");
+            }
+        // check if expr1.type matches with expr2.type
+        return new ParseTree.ExprAdd(expr1,expr2);
+    }
+    Object expr____expr_SUB_expr(Object s1, Object s2, Object s3) throws Exception
+    {
+        // 1. check if expr1.value_type matches with the expr2.value_type
+        // 2. etc.
+        // 3. create and return node that has value_type
+        ParseTree.Expr expr1 = (ParseTree.Expr)s1;
+        Token          oper  = (Token         )s2;
+        ParseTree.Expr expr2 = (ParseTree.Expr)s3;
+        // check if expr1.type matches with expr2.type
+        return new ParseTree.ExprSub(expr1,expr2);
+    }
+    Object expr____expr_MUL_expr(Object s1, Object s2, Object s3) throws Exception
+    {
+        // 1. check if expr1.value_type matches with the expr2.value_type
+        // 2. etc.
+        // 3. create and return node that has value_type
+        ParseTree.Expr expr1 = (ParseTree.Expr)s1;
+        Token          oper  = (Token         )s2;
+        ParseTree.Expr expr2 = (ParseTree.Expr)s3;
+        // check if expr1.type matches with expr2.type
+        return new ParseTree.ExprMul(expr1,expr2);
+    }
+    Object expr____expr_DIV_expr(Object s1, Object s2, Object s3) throws Exception
+    {
+        // 1. check if expr1.value_type matches with the expr2.value_type
+        // 2. etc.
+        // 3. create and return node that has value_type
+        ParseTree.Expr expr1 = (ParseTree.Expr)s1;
+        Token          oper  = (Token         )s2;
+        ParseTree.Expr expr2 = (ParseTree.Expr)s3;
+        // check if expr1.type matches with expr2.type
+        return new ParseTree.ExprDiv(expr1,expr2);
+    }
+    Object expr____expr_MOD_expr(Object s1, Object s2, Object s3) throws Exception
+    {
+        // 1. check if expr1.value_type matches with the expr2.value_type
+        // 2. etc.
+        // 3. create and return node that has value_type
+        ParseTree.Expr expr1 = (ParseTree.Expr)s1;
+        Token          oper  = (Token         )s2;
+        ParseTree.Expr expr2 = (ParseTree.Expr)s3;
+        // check if expr1.type matches with expr2.type
+        return new ParseTree.ExprMod(expr1,expr2);
+    }
     
+    Object expr____expr_EQ_expr(Object s1, Object s2, Object s3) throws Exception
+    {
+        // 1. check if expr1.value_type matches with the expr2.value_type
+        // 2. etc.
+        // 3. create and return node that has value_type
+        ParseTree.Expr expr1 = (ParseTree.Expr)s1;
+        Token          oper  = (Token         )s2;
+        ParseTree.Expr expr2 = (ParseTree.Expr)s3;
+        // check if expr1.type matches with expr2.type
+        return new ParseTree.ExprEq(expr1,expr2);
+    }
+    Object expr____expr_NE_expr(Object s1, Object s2, Object s3) throws Exception
+    {
+        // 1. check if expr1.value_type matches with the expr2.value_type
+        // 2. etc.
+        // 3. create and return node that has value_type
+        ParseTree.Expr expr1 = (ParseTree.Expr)s1;
+        Token          oper  = (Token         )s2;
+        ParseTree.Expr expr2 = (ParseTree.Expr)s3;
+        // check if expr1.type matches with expr2.type
+        return new ParseTree.ExprNe(expr1,expr2);
+    }
+    Object expr____expr_LE_expr(Object s1, Object s2, Object s3) throws Exception
+    {
+        // 1. check if expr1.value_type matches with the expr2.value_type
+        // 2. etc.
+        // 3. create and return node that has value_type
+        ParseTree.Expr expr1 = (ParseTree.Expr)s1;
+        Token          oper  = (Token         )s2;
+        ParseTree.Expr expr2 = (ParseTree.Expr)s3;
+        // check if expr1.type matches with expr2.type
+        return new ParseTree.ExprLe(expr1,expr2);
+    }
+    Object expr____expr_LT_expr(Object s1, Object s2, Object s3) throws Exception
+    {
+        // 1. check if expr1.value_type matches with the expr2.value_type
+        // 2. etc.
+        // 3. create and return node that has value_type
+        ParseTree.Expr expr1 = (ParseTree.Expr)s1;
+        Token          oper  = (Token         )s2;
+        ParseTree.Expr expr2 = (ParseTree.Expr)s3;
+        // check if expr1.type matches with expr2.type
+        return new ParseTree.ExprLe(expr1,expr2);
+    }
+    Object expr____expr_GE_expr(Object s1, Object s2, Object s3) throws Exception
+    {
+        // 1. check if expr1.value_type matches with the expr2.value_type
+        // 2. etc.
+        // 3. create and return node that has value_type
+        ParseTree.Expr expr1 = (ParseTree.Expr)s1;
+        Token          oper  = (Token         )s2;
+        ParseTree.Expr expr2 = (ParseTree.Expr)s3;
+        // check if expr1.type matches with expr2.type
+        return new ParseTree.ExprLt(expr1,expr2);
+    }
+    Object expr____expr_GT_expr(Object s1, Object s2, Object s3) throws Exception
+    {
+        // 1. check if expr1.value_type matches with the expr2.value_type
+        // 2. etc.
+        // 3. create and return node that has value_type
+        ParseTree.Expr expr1 = (ParseTree.Expr)s1;
+        Token          oper  = (Token         )s2;
+        ParseTree.Expr expr2 = (ParseTree.Expr)s3;
+        // check if expr1.type matches with expr2.type
+        return new ParseTree.ExprGt(expr1,expr2);
+    }
+    Object expr____expr_AND_expr(Object s1, Object s2, Object s3) throws Exception
+    {
+        // 1. check if expr1.value_type matches with the expr2.value_type
+        // 2. etc.
+        // 3. create and return node that has value_type
+        ParseTree.Expr expr1 = (ParseTree.Expr)s1;
+        Token          oper  = (Token         )s2;
+        ParseTree.Expr expr2 = (ParseTree.Expr)s3;
+        // check if expr1.type matches with expr2.type
+        return new ParseTree.ExprAnd(expr1,expr2);
+    }
+    Object expr____expr_OR_expr(Object s1, Object s2, Object s3) throws Exception
+    {
+        // 1. check if expr1.value_type matches with the expr2.value_type
+        // 2. etc.
+        // 3. create and return node that has value_type
+        ParseTree.Expr expr1 = (ParseTree.Expr)s1;
+        Token          oper  = (Token         )s2;
+        ParseTree.Expr expr2 = (ParseTree.Expr)s3;
+        // check if expr1.type matches with expr2.type
+        return new ParseTree.ExprOr(expr1,expr2);
+    }
+    Object expr____NOT_expr(Object s1, Object s2, Object s3) throws Exception
+    {
+        // 1. check if expr1.value_type matches with the expr2.value_type
+        // 2. etc.
+        // 3. create and return node that has value_type
+        ParseTree.Expr expr1 = (ParseTree.Expr)s1;
+        Token          oper  = (Token         )s2;
+        // check if expr1.type matches with expr2.type
+        return new ParseTree.ExprNot(expr1);
+    }
+    Object expr____LPAREN_expr_RPAREN(Object s1, Object s2, Object s3) throws Exception
+    {
+        // 1. create and return node whose value_type is the same to the expr.value_type
+        Token          lparen = (Token         )s1;
+        ParseTree.Expr expr   = (ParseTree.Expr)s2;
+        Token          rparen = (Token         )s3;
+        return new ParseTree.ExprParen(expr);
+    }
+    Object expr____IDENT(Object s1) throws Exception
+    {
+        // 1. check if id.lexeme can be found in chained symbol tables
+        // 2. check if it is variable type
+        // 3. etc.
+        // 4. create and return node that has the value_type of the id.lexeme
+        Token id = (Token)s1;
+        ParseTree.ExprIdent expr = new ParseTree.ExprIdent(id.lexeme);
+        expr.reladdr = 1;
+        return expr;
+    }
+    Object expr____CALL_IDENT_LPAREN_args_RPAREN(Object s2, Object s4) throws Exception
+    {
+        // 1. check if id.lexeme can be found in chained symbol tables
+        // 2. check if it is function type
+        // 3. check if the number and types of env(id.lexeme).params match with those of args
+        // 4. etc.
+        // 5. create and return node that has the value_type of env(id.lexeme).return_type
+        Token                    id   = (Token                   )s2;
+        ArrayList<ParseTree.Arg> args = (ArrayList<ParseTree.Arg>)s4;
+        Object func_attr = env.Get(id.lexeme);
+        {
+            // check if argument types match with function param types
+            if(env.Get(id.lexeme).equals("func()->int")
+                && (args.size() == 0)
+                )
+            {} // ok
+            else
+            {
+                throw new Exception("semantic error");
+            }
+        }
+        return new ParseTree.ExprCall(id.lexeme, args);
+    }
+    Object expr____INTLIT(Object s1) throws Exception
+    {
+        // 1. create and return node that has int type
+        Token token = (Token)s1;
+        int value = Integer.parseInt(token.lexeme);
+        return new ParseTree.ExprIntLit(value);
+    }
+    Object expr____BOOLLIT(Object s1) throws Exception
+    {
+        // 1. create and return node that has int type
+        Token token = (Token)s1;
+        boolean value = Boolean.parseBoolean(token.lexeme);
+        return new ParseTree.ExprBoolLit(value);
+    }
 }
