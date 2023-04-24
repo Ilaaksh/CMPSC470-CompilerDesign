@@ -60,18 +60,18 @@ fun_decl        : FUNC IDENT LPAREN params RPAREN FUNCRET prim_type BEGIN local_
 params          :                                               { Debug("params -> eps");                               $$ = params____eps(); }
                 ;
 
-param_list      : param_list  COMMA  param {}                  { Debug("param_list -> param_list COMMA param");         $$ = param_list____param_list_COMMA_param($1, $2, $3); }
-                | param {}                                     { Debug("params -> eps");                                $$ = param(); }
+param_list      : param_list  COMMA  param                  { Debug("param_list -> param_list COMMA param");         $$ = param_list____param_list_COMMA_param($1, $2, $3); }
+                | param                                      { Debug("params -> eps");                                $$ = param(); }
                 ;
 
-param           : VAR type_spec IDENT {}                       { Debug("param -> VAR type_spec IDENT ");                $$ = param____VAR_type_spec($1,$2,$3); }
+param           : VAR type_spec IDENT                        { Debug("param -> VAR type_spec IDENT ");                $$ = param____VAR_type_spec($1,$2,$3); }
                 ;
 
-type_spec       : prim_type {}                                { Debug("type_spec -> prim_type" );                       $$ = type_spec____prime_type($1); }
+type_spec       : prim_type                                 { Debug("type_spec -> prim_type" );                       $$ = type_spec____prime_type($1); }
                 ;
 
-prim_type       : INT {}                                      { Debug("prime_type -> INT");                             $$ = prime_type____INT(); }
-                | BOOL {}                                     { Debug("prime_type -> BOOL ");                           $$ = prime_type____BOOL(); }
+prim_type       : INT                                       { Debug("prime_type -> INT");                             $$ = prime_type____INT(); }
+                | BOOL                                      { Debug("prime_type -> BOOL ");                           $$ = prime_type____BOOL(); }
                 ;
 
 local_decls     : local_decls  local_decl                       { Debug("local_decls -> local_decls local_decl" );      $$ = localdecls____localdecls_localdecl($1, $2); }
@@ -96,47 +96,47 @@ stmt            : assign_stmt                                   {Debug("stmt -> 
     assign_stmt     : IDENT ASSIGN expr SEMI                        { Debug("assign_stmt -> IDENT <- expr ");           $$ = assignstmt____IDENT_ASSIGN_expr_SEMI($1,$2,$3); }
                 ;
 
-print_stmt      : PRINT  expr  SEMI {}                             { Debug("print_stmt -> PRINT expr SEMI");            $$ = printstmt____PRINT_expr_SEMI($2); }
+print_stmt      : PRINT  expr  SEMI                              { Debug("print_stmt -> PRINT expr SEMI");            $$ = printstmt____PRINT_expr_SEMI($2); }
                 ;
 
 return_stmt     : RETURN expr SEMI                              { Debug("return_stmt -> RETURN expr ");                             $$ = returnstmt____RETURN_expr_SEMI($2); }
                 ;
 
-if_stmt         :IF  LPAREN  expr  RPAREN  stmt  ELSE  stmt {}    { Debug("if_stmyt -> IF LPAREN expr RPAREN stmt ELSE stmt");      $$ = ifstmyt____IF_LPAREN_expr_RPAREN_stmt_ELSE_stmt($1,$2,$3); }
+if_stmt         :IF  LPAREN  expr  RPAREN  stmt  ELSE  stmt     { Debug("if_stmyt -> IF LPAREN expr RPAREN stmt ELSE stmt");      $$ = ifstmyt____IF_LPAREN_expr_RPAREN_stmt_ELSE_stmt($1,$2,$3); }
                 ;
 
-while_stmt      :WHILE  LPAREN  expr  RPAREN  stmt {}              { Debug("while_stmt -> WHILE LPAREN expr RPAREN stmt");        $$ = whilestmt____WHILE_LPAREN_expr_RPAREN_stmt($1,$2); }
+while_stmt      :WHILE  LPAREN  expr  RPAREN  stmt               { Debug("while_stmt -> WHILE LPAREN expr RPAREN stmt");        $$ = whilestmt____WHILE_LPAREN_expr_RPAREN_stmt($1,$2); }
                 ;
 
-compound_stmt   :BEGIN  local_decls  stmt_list  END {}            { Debug("compound_stmt -> BEGIN local_decls stmt_list END" );     $$ = compoundstmt____BEGIN_localdecls_stmtlist_END($1,$2); }
+compound_stmt   :BEGIN  local_decls  stmt_list  END             { Debug("compound_stmt -> BEGIN local_decls stmt_list END" );     $$ = compoundstmt____BEGIN_localdecls_stmtlist_END($1,$2); }
                 ;
 
 args            :arg_list                        {Debug("args -> arg_list" );                                           $$ = args____arglist($1);}
                 |                                {Debug("args -> eps" );                                                $$ = args____eps(); }
                 ;
 
-arg_list       :arg_list  COMMA  expr  {}         { Debug("arg_list -> arg_list COMMA expr" );                          $$ = arglist____arglist_arglist_COMMA_expr_($1,$2); }
-                | expr {}                         { Debug("arg_list -> expr");                                          $$ = arglist____expr($1); }
+arg_list       :arg_list  COMMA  expr           { Debug("arg_list -> arg_list COMMA expr" );                          $$ = arglist____arglist_arglist_COMMA_expr_($1,$2); }
+                | expr                          { Debug("arg_list -> expr");                                          $$ = arglist____expr($1); }
 
-expr            :expr  ADD  expr                  { Debug("expr -> expr ADD expr" );                            {$$ = expr____expr_ADD_expr                ($1,$2,$3);}
-                | expr  SUB  expr                 { Debug("expr -> expr SUB expr" );                            {$$ = expr____expr_SUB_expr                 ($1,$2,$3);}
-                | expr  MUL  expr                  { Debug("expr -> expr MUL expr" );                           {$$ = expr____expr_MUL_expr                 ($1,$2,$3);}
-                | expr  DIV  expr                 { Debug("expr -> expr DIV expr" );                            {$$ = expr____expr_DIV_expr                 ($1,$2,$3);}
-                | expr  MOD  expr                { Debug("expr -> expr MOD expr" );                             {$$ = expr____expr_MOD_expr                 ($1,$2,$3);}
-                | expr  EQ   expr                { Debug("expr -> expr EQ expr" );                              {$$ = expr____expr_EQ_expr                 ($1,$2,$3);}
-                | expr  NE   expr                  { Debug("expr -> expr NE expr" );                            {$$ = expr____expr_NE_expr                 ($1,$2,$3);}
-                | expr  LE   expr                 { Debug("expr -> expr LE expr" );                             {$$ = expr____expr_LE_expr                 ($1,$2,$3);}
-                | expr  LT   expr                  { Debug("expr -> expr LT expr" );                             {$$ = expr____expr_LT_expr                 ($1,$2,$3);}
-                | expr  GE   expr                   { Debug("expr -> expr GE expr" );                           {$$ = expr____expr_GE_expr                 ($1,$2,$3);}
-                | expr  GT  expr                    { Debug("expr -> expr GT expr" );                           {$$ = expr____expr_GT_expr                 ($1,$2,$3);}
-                |  expr  AND  expr                   { Debug("expr -> expr AND expr" );                          {$$ = expr____expr_AND_expr                 ($1,$2,$3);}
-                | expr  OR   expr                    { Debug("expr -> expr OR expr" );                          {$$ = expr____expr_OR_expr                 ($1,$2,$3);}
-                | NOT  expr                         { Debug("expr -> NOT expr" );                               {$$ = expr____NOT_expr                      ($1,$2);}
-                |  LPAREN  expr  RPAREN              { Debug("expr -> LPAREN expr RPAREN" );                    {$$ = expr____LPAREN_expr_RPAREN            ($1,$2,$3);}
-                |  IDENT                             { Debug("expr -> IDENT" );                                 {$$ = expr____IDENT                         ($1);}
-                |  INT_LIT                            { Debug("expr -> INT_LIT" );                              {$$ = expr____INT_LIT                       ($1);}
-                |  BOOL_LIT                           { Debug("expr -> BOOL_LIT" );                             {$$ = expr____BOOL_LIT                       ($1);}
-                |  CALL  IDENT  LPAREN  args  RPAREN   { Debug("expr -> CALL IDENT LPAREN args RPAREN" );      {$$ = expr____CALL IDENT LPAREN args RPAREN  ($2,$4);}
+expr            :expr  ADD  expr                  { Debug("expr -> expr ADD expr" );                            $$ = expr____expr_ADD_expr                ($1,$2,$3);}
+                | expr  SUB  expr                 { Debug("expr -> expr SUB expr" );                            $$ = expr____expr_SUB_expr                 ($1,$2,$3);}
+                | expr  MUL  expr                  { Debug("expr -> expr MUL expr" );                           $$ = expr____expr_MUL_expr                 ($1,$2,$3);}
+                | expr  DIV  expr                 { Debug("expr -> expr DIV expr" );                            $$ = expr____expr_DIV_expr                 ($1,$2,$3);}
+                | expr  MOD  expr                { Debug("expr -> expr MOD expr" );                             $$ = expr____expr_MOD_expr                 ($1,$2,$3);}
+                | expr  EQ   expr                { Debug("expr -> expr EQ expr" );                              $$ = expr____expr_EQ_expr                 ($1,$2,$3);}
+                | expr  NE   expr                  { Debug("expr -> expr NE expr" );                            $$ = expr____expr_NE_expr                 ($1,$2,$3);}
+                | expr  LE   expr                 { Debug("expr -> expr LE expr" );                             $$ = expr____expr_LE_expr                 ($1,$2,$3);}
+                | expr  LT   expr                  { Debug("expr -> expr LT expr" );                             $$ = expr____expr_LT_expr                 ($1,$2,$3);}
+                | expr  GE   expr                   { Debug("expr -> expr GE expr" );                           $$ = expr____expr_GE_expr                 ($1,$2,$3);}
+                | expr  GT  expr                    { Debug("expr -> expr GT expr" );                           $$ = expr____expr_GT_expr                 ($1,$2,$3);}
+                |  expr  AND  expr                   { Debug("expr -> expr AND expr" );                          $$ = expr____expr_AND_expr                 ($1,$2,$3);}
+                | expr  OR   expr                    { Debug("expr -> expr OR expr" );                          $$ = expr____expr_OR_expr                 ($1,$2,$3);}
+                | NOT  expr                         { Debug("expr -> NOT expr" );                               $$ = expr____NOT_expr                      ($1,$2);}
+                |  LPAREN  expr  RPAREN              { Debug("expr -> LPAREN expr RPAREN" );                    $$ = expr____LPAREN_expr_RPAREN            ($1,$2,$3);}
+                |  IDENT                             { Debug("expr -> IDENT" );                                 $$ = expr____IDENT                         ($1);}
+                |  INT_LIT                            { Debug("expr -> INT_LIT" );                              $$ = expr____INT_LIT                       ($1);}
+                |  BOOL_LIT                           { Debug("expr -> BOOL_LIT" );                             $$ = expr____BOOL_LIT                       ($1);}
+                |  CALL  IDENT  LPAREN  args  RPAREN   { Debug("expr -> CALL IDENT LPAREN args RPAREN" );      $$ = expr____CALL IDENT LPAREN args RPAREN  ($2,$4);}
                 ;
 
 %%
