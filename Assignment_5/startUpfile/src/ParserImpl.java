@@ -118,7 +118,7 @@ public class ParserImpl
     }
     Object stmt____printstmt  (Object s1) throws Exception
     {
-        assert(s1 instanceof ParseTree.WhileStmt);
+        assert(s1 instanceof ParseTree.PrintStmt);
         return s1;
     }
     Object stmt____compoundstmt  (Object s1) throws Exception
