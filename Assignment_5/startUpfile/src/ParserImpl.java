@@ -48,6 +48,11 @@ public class ParserImpl
         ParseTree.TypeSpec typespec = new ParseTree.TypeSpec("int");
         return typespec;
     }
+    Object primtype____BOOL() throws Exception
+    {
+        ParseTree.TypeSpec typespec = new ParseTree.TypeSpec("int");
+        return typespec;
+    }
     Object typespec____primtype(Object s1)
     {
         ParseTree.TypeSpec primtype = (ParseTree.TypeSpec)s1;
