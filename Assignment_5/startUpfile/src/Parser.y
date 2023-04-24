@@ -1,4 +1,15 @@
-
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Copyright (C) 2001 Gerwin Klein <lsf@jflex.de>                          *
+ * All rights reserved.                                                    *
+ *                                                                         *
+ * This is a modified version of the example from                          *
+ *   http://www.lincom-asg.com/~rjamison/byacc/                            *
+ *                                                                         *
+ * Thanks to Larry Bell and Bob Jamison for suggestions and comments.      *
+ *                                                                         *
+ * License: BSD                                                            *
+ *                                                                         *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 %{
 import java.io.*;
@@ -33,79 +44,79 @@ import java.io.*;
 %%
 
 
-program         : decl_list                              {Debug("program -> decl_list"                           ); $$ = program_decllist($1);}
+program         : decl_list                              {Debug("program -> decl_list" );                               $$ = program_decllist($1);}
                 ;
 
-decl_list       : decl_list decl                         {Debug("decl_list -> decl_list decl"                    );$$ = decllist_decllist_decl($1,$2);}
-                |                                        {Debug("decl_list -> eps"                               );$$ = decllist_eps          (     );}
+decl_list       : decl_list decl                         {Debug("decl_list -> decl_list decl" );                        $$ = decllist_decllist_decl($1,$2);}
+                |                                        {Debug("decl_list -> eps" );                                   $$ = decllist_eps          (     );}
                 ;
 
-decl            : fun_decl                               {Debug("decl -> fun_decl"                               );$$ = decl_fundecl($1); }
+decl            : fun_decl                               {Debug("decl -> fun_decl");                                    $$ = decl_fundecl($1); }
                 ;
-fun_decl        : FUNC IDENT LPAREN params RPAREN FUNCRET prim_type BEGIN local_decls{ Debug("fun_decl -> FUNC ID(params)->prim_type BEGIN local_decls"); $<obj>$ = fundecl____FUNC_IDENT_LPAREN_params_RPAREN_FUNCRET_primtype_BEGIN_localdecls_10X_stmtlist_END($2, $4, $7, $9          ); }
-                                                                        stmt_list END{ Debug("                                           stmt_list END"); $$ =      fundecl____FUNC_IDENT_LPAREN_params_RPAREN_FUNCRET_primtype_BEGIN_localdecls_X10_stmtlist_END($2, $4, $7, $9, $11, $12); }
-                ;
-
-params          :                                               { Debug("params -> eps"                         ); $$ = params____eps(); }
+fun_decl        : FUNC IDENT LPAREN params RPAREN FUNCRET prim_type BEGIN local_decls  { Debug("fun_decl -> FUNC ID(params)->prim_type BEGIN local_decls"); $<obj>$ = fundecl____FUNC_IDENT_LPAREN_params_RPAREN_FUNCRET_primtype_BEGIN_localdecls_10X_stmtlist_END($2, $4, $7, $9          ); }
+                                                                        stmt_list END{ Debug("                                           stmt_list END");   $$ =      fundecl____FUNC_IDENT_LPAREN_params_RPAREN_FUNCRET_primtype_BEGIN_localdecls_X10_stmtlist_END($2, $4, $7, $9, $11, $12); }
                 ;
 
-param_list      : param_list  COMMA  param {}
-                | param {}
+params          :                                               { Debug("params -> eps");                               $$ = params____eps(); }
                 ;
 
-param           : VAR type_spec IDENT {}
+param_list      : param_list  COMMA  param {}                  { Debug("param_list -> param_list COMMA param");         $$ = param_list____param_list_COMMA_param(); }
+                | param {}                                     { Debug("params -> eps");                                $$ = param(); }
                 ;
 
-type_spec       : prim_type {}
+param           : VAR type_spec IDENT {}                       { Debug("param -> VAR type_spec IDENT ");                $$ = param____VAR_type_spec(); }
                 ;
 
-prim_type       : INT {}
-                | BOOL {}
+type_spec       : prim_type {}                                { Debug("type_spec -> prim_type" );                       $$ = type_spec____prime_type(); }
                 ;
 
-local_decls     : local_decls  local_decl                       { Debug("local_decls -> local_decls local_decl" ); $$ = localdecls____localdecls_localdecl($1, $2); }
-                |                                               { Debug("local_decls -> eps"                    ); $$ = localdecls____eps(); }
+prim_type       : INT {}                                      { Debug("prime_type -> INT");                             $$ = prime_type____INT(); }
+                | BOOL {}                                     { Debug("prime_type -> BOOL ");                           $$ = prime_type____BOOL(); }
                 ;
 
-local_decl      : VAR  type_spec  IDENT  SEMI                   { Debug("local_decl -> VAR type_spec IDENT SEMI"); $$ = localdecl____VAR_typespec_IDENT_SEMI($2, $3); }
+local_decls     : local_decls  local_decl                       { Debug("local_decls -> local_decls local_decl" );      $$ = localdecls____localdecls_localdecl($1, $2); }
+                |                                               { Debug("local_decls -> eps"                    );      $$ = localdecls____eps(); }
                 ;
 
-stmt_list       : stmt_list stmt                                { Debug("stmt_list -> stmt_list stmt"           ); $$ = stmtlist____stmtlist_stmt($1, $2); }
-                |                                               { Debug("stmt_list -> eps"                      ); $$ = stmtlist____eps          (      ); }
+local_decl      : VAR  type_spec  IDENT  SEMI                   { Debug("local_decl -> VAR type_spec IDENT SEMI");      $$ = localdecl____VAR_typespec_IDENT_SEMI($2, $3); }
                 ;
 
-stmt            : assign_stmt                                   {Debug("stmt -> assign_stmt"                   ); $$ = stmt____assignstmt  ($1); }
-                | return_stmt                                   {Debug("stmt -> return_stmt"                   ); $$ = stmt____returnstmt  ($1); }
-                | print_stmt                                   {Debug("stmt -> print_stmt"                   ); $$ = stmt____printstmt  ($1); }
-                | if_stmt                                      {Debug("stmt -> if_stmt"                      ); $$ = stmt____ifstmt  ($1); }
-                | while_stmt                                   {Debug("stmt -> while_stmt"                   ); $$ = stmt____whilestmt  ($1); }
-                | compound_stmt                                {Debug("stmt -> compound_stmt"                   ); $$ = stmt____compoundstmt  ($1); }
+stmt_list       : stmt_list stmt                                { Debug("stmt_list -> stmt_list stmt");                 $$ = stmtlist____stmtlist_stmt($1, $2); }
+                |                                               { Debug("stmt_list -> eps");                            $$ = stmtlist____eps          (      ); }
                 ;
 
-assign_stmt     : IDENT ASSIGN expr SEMI                        { Debug("assign_stmt -> IDENT <- expr ;"        ); $$ = assignstmt____IDENT_ASSIGN_expr_SEMI($1,$2,$3); }
+stmt            : assign_stmt                                   {Debug("stmt -> assign_stmt");                          $$ = stmt____assignstmt  ($1); }
+                | return_stmt                                   {Debug("stmt -> return_stmt" );                         $$ = stmt____returnstmt  ($1); }
+                | print_stmt                                   {Debug("stmt -> print_stmt" );                           $$ = stmt____printstmt  ($1); }
+                | if_stmt                                      {Debug("stmt -> if_stmt");                               $$ = stmt____ifstmt  ($1); }
+                | while_stmt                                   {Debug("stmt -> while_stmt" );                           $$ = stmt____whilestmt  ($1); }
+                | compound_stmt                                {Debug("stmt -> compound_stmt" );                        $$ = stmt____compoundstmt  ($1); }
                 ;
 
-print_stmt      : PRINT  expr  SEMI {}
+    assign_stmt     : IDENT ASSIGN expr SEMI                        { Debug("assign_stmt -> IDENT <- expr ");           $$ = assignstmt____IDENT_ASSIGN_expr_SEMI($1,$2,$3); }
                 ;
 
-return_stmt     : RETURN expr SEMI                              { Debug("return_stmt -> RETURN expr ;"          ); $$ = returnstmt____RETURN_expr_SEMI($2); }
+print_stmt      : PRINT  expr  SEMI {}                             { Debug("print_stmt -> PRINT expr SEMI");            $$ = params____eps(); }
                 ;
 
-if_stmt         :IF  LPAREN  expr  RPAREN  stmt  ELSE  stmt {}
+return_stmt     : RETURN expr SEMI                              { Debug("return_stmt -> RETURN expr ");                 $$ = returnstmt____RETURN_expr_SEMI($2); }
                 ;
 
-while_stmt      :WHILE  LPAREN  expr  RPAREN  stmt {}
+if_stmt         :IF  LPAREN  expr  RPAREN  stmt  ELSE  stmt {}    { Debug("if_stmyt -> IF LPAREN expr RPAREN stmt ELSE stmt");      $$ = params____eps(); }
                 ;
 
-compound_stmt   :BEGIN  local_decls  stmt_list  END {}
+while_stmt      :WHILE  LPAREN  expr  RPAREN  stmt {}              { Debug("while_stmt -> WHILE LPAREN expr RPAREN stmt");        $$ = params____eps(); }
                 ;
 
-args            :arg_list                        {Debug("args -> arg_list"                      ); $$ = args____eps();}
-                |                                {Debug("args -> eps"                           ); $$ = args____eps(); }
+compound_stmt   :BEGIN  local_decls  stmt_list  END {}            { Debug("compound_stmt -> BEGIN local_decls stmt_list END" );     $$ = params____eps(); }
                 ;
 
-arg_list       :arg_list  COMMA  expr  {}
-                | expr {}
+args            :arg_list                        {Debug("args -> arg_list" );                                           $$ = args____eps();}
+                |                                {Debug("args -> eps" );                                                $$ = args____eps(); }
+                ;
+
+arg_list       :arg_list  COMMA  expr  {}         { Debug("arg_list -> arg_list COMMA expr" );                          $$ = params____eps(); }
+                | expr {}                         { Debug("arg_list -> expr");                                          $$ = params____eps(); }
 
 expr            :expr  ADD  expr                            {$$ = expr__expr_ADD_expr                ($1,$2,$3);}
                 | expr  SUB  expr                           {$$ = expr__expr_SUB_expr                 ($1,$2,$3);}
@@ -120,11 +131,11 @@ expr            :expr  ADD  expr                            {$$ = expr__expr_ADD
                 | expr  GT  expr                            {$$ = expr__expr_GT_expr                 ($1,$2,$3);}
                 |  expr  AND  expr                          {$$ = expr__expr_AND_expr                 ($1,$2,$3);}
                 | expr  OR   expr                           {$$ = expr__expr_OR_expr                 ($1,$2,$3);}
-                | NOT  expr                                 {$$ = expr__NOT_expr                      ($1,$2);}
+                | NOT  expr                                 {$$ = expr__NOT_expr                      ($1,$2,$3);}
                 |  LPAREN  expr  RPAREN                     {$$ = expr__LPAREN_expr_RPAREN            ($1,$2,$3);}
                 |  IDENT                                    {$$ = expr__IDENT                         ($1)      ;}
                 |  INT_LIT                                  {$$ = expr__INT_LIT                       ($1)      ;}
-                |  BOOL_LIT                                 {$$ = expr__BOOL_LIT                       ($1);}
+                |  BOOL_LIT                                 {$$ = expr__BOOL_LIT                       ($1,$2,$3);}
                 |  CALL  IDENT  LPAREN  args  RPAREN        {$$ = expr__CALL IDENT LPAREN args RPAREN  ($1,$2,$3);}
                 ;
 
