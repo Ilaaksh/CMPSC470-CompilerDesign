@@ -12,40 +12,7 @@ public class ParserImpl
     }
 
     // This is for chained symbol table.
-    // This includes the global scope only at this moment.
-    private static final String FUNC = "FUNC";
-    private static final String IDENT = "IDENT";
-    private static final String LPAREN = "LPAREN";
-    private static final String RPAREN = "RPAREN";
-    private static final String FUNCRET = "FUNCRET";
-    private static final String BEGIN = "BEGIN";
-    private static final String END = "END";
-    private static final String COMMA = "COMMA";
-    private static final String VAR = "VAR";
-    private static final String SEMI = "SEMI";
-    private static final String PRINT = "PRINT";
-    private static final String RETURN = "RETURN";
-    private static final String IF = "IF";
-    private static final String ELSE = "ELSE";
-    private static final String WHILE = "WHILE";
-    private static final String ADD = "ADD";
-    private static final String SUB = "SUB";
-    private static final String MUL = "MUL";
-    private static final String DIV = "DIV";
-    private static final String MOD = "MOD";
-    private static final String EQ = "EQ";
-    private static final String NE = "NE";
-    private static final String LE = "LE";
-    private static final String LT = "LT";
-    private static final String GE = "GE";
-    private static final String GT = "GT";
-    private static final String AND = "AND";
-    private static final String OR = "OR";
-    private static final String NOT = "NOT";
-    private static final String INT_LIT = "INT_LIT";
-    private static final String BOOL_LIT = "BOOL_LIT";
-    private static final String CALL = "CALL";
-
+    // This includes the global scope only at this moment.set
     Env env = new Env(null);
     // this stores the root of parse tree, which will be used to print parse tree and run the parse tree
     ParseTree.Program parsetree_program = null;

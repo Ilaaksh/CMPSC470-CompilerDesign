@@ -1,15 +1,4 @@
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * Copyright (C) 2001 Gerwin Klein <lsf@jflex.de>                          *
- * All rights reserved.                                                    *
- *                                                                         *
- * This is a modified version of the example from                          *
- *   http://www.lincom-asg.com/~rjamison/byacc/                            *
- *                                                                         *
- * Thanks to Larry Bell and Bob Jamison for suggestions and comments.      *
- *                                                                         *
- * License: BSD                                                            *
- *                                                                         *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 
 %{
 import java.io.*;
@@ -131,11 +120,11 @@ expr            :expr  ADD  expr                            {$$ = expr__expr_ADD
                 | expr  GT  expr                            {$$ = expr__expr_GT_expr                 ($1,$2,$3);}
                 |  expr  AND  expr                          {$$ = expr__expr_AND_expr                 ($1,$2,$3);}
                 | expr  OR   expr                           {$$ = expr__expr_OR_expr                 ($1,$2,$3);}
-                | NOT  expr                                 {$$ = expr__NOT_expr                      ($1,$2,$3);}
+                | NOT  expr                                 {$$ = expr__NOT_expr                      ($1);}
                 |  LPAREN  expr  RPAREN                     {$$ = expr__LPAREN_expr_RPAREN            ($1,$2,$3);}
                 |  IDENT                                    {$$ = expr__IDENT                         ($1)      ;}
                 |  INT_LIT                                  {$$ = expr__INT_LIT                       ($1)      ;}
-                |  BOOL_LIT                                 {$$ = expr__BOOL_LIT                       ($1,$2,$3);}
+                |  BOOL_LIT                                 {$$ = expr__BOOL_LIT                       ($1);}
                 |  CALL  IDENT  LPAREN  args  RPAREN        {$$ = expr__CALL IDENT LPAREN args RPAREN  ($1,$2,$3);}
                 ;
 
