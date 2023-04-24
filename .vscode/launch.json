@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "SemanticChecker",
+            "request": "launch",
+            "mainClass": "SemanticChecker",
+            "projectName": "CMPSC470-CompilerDesign_188f7e"
+        },
+        {
+            "type": "java",
+            "name": "TestEnv",
+            "request": "launch",
+            "mainClass": "TestEnv",
+            "projectName": "CMPSC470-CompilerDesign_188f7e"
+        }
+    ]
+}
