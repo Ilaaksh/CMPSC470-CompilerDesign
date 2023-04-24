@@ -106,6 +106,28 @@ public class ParserImpl
         assert(s1 instanceof ParseTree.ReturnStmt);
         return s1;
     }
+    Object stmt____whilestmt  (Object s1) throws Exception
+    {
+        assert(s1 instanceof ParseTree.WhileStmt);
+        return s1;
+    }
+    Object stmt____ifstmt  (Object s1) throws Exception
+    {
+        assert(s1 instanceof ParseTree.IfStmt);
+        return s1;
+    }
+    Object stmt____printstmt  (Object s1) throws Exception
+    {
+        assert(s1 instanceof ParseTree.WhileStmt);
+        return s1;
+    }
+    Object stmt____compoundstmt  (Object s1) throws Exception
+    {
+        assert(s1 instanceof ParseTree.CompoundStmt);
+        return s1;
+    }
+
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -183,22 +205,7 @@ public class ParserImpl
         ParseTree.Expr expr1 = (ParseTree.Expr)s1;
         Token          oper  = (Token         )s2;
         ParseTree.Expr expr2 = (ParseTree.Expr)s3;
-        if(expr1.equals("+")
-                && (expr1 instanceof ParseTree.Expr)
-                )
-                {
-                    return "+";
-                } // ok
-            else if(expr2.equals("expr")
-                && (expr2 instanceof ParseTree.ExprCall)
-                && (env.Get(((ParseTree.ExprCall)expr2).ident).equals("func()->int"))
-                )
-            {
-            } // ok
-            else
-            {
-                throw new Exception("semantic error");
-            }
+    
         // check if expr1.type matches with expr2.type
         return new ParseTree.ExprAdd(expr1,expr2);
     }
