@@ -86,11 +86,30 @@ public class ParserImpl
         return funcdecl;
     }
 
+
     Object params____eps() throws Exception 
     {
         return new ArrayList<ParseTree.Param>();
     }
-
+    Object param____eps() throws Exception 
+    {
+        return new ArrayList<ParseTree.Param>();
+    }
+    Object param____VAR_type_spec(Object s1, Object s2) throws Exception
+    {
+        ArrayList<ParseTree.Stmt> stmtlist = (ArrayList<ParseTree.Stmt>)s1;
+        ParseTree.Stmt            stmt     = (ParseTree.Stmt           )s2;
+        stmtlist.add(stmt);
+        return stmtlist;
+    }
+    Object param_list____param_list_COMMA_param(Object s1, Object s2,Object s3) throws Exception
+    {
+        ArrayList<ParseTree.Stmt> stmtlist = (ArrayList<ParseTree.Stmt>)s1;
+        ParseTree.Stmt            stmt     = (ParseTree.Stmt           )s2;
+        stmtlist.add(stmt);
+        return stmtlist;
+    }
+    
     Object stmtlist____stmtlist_stmt(Object s1, Object s2) throws Exception
     {
         ArrayList<ParseTree.Stmt> stmtlist = (ArrayList<ParseTree.Stmt>)s1;
@@ -128,13 +147,108 @@ public class ParserImpl
         assert(s1 instanceof ParseTree.PrintStmt);
         return s1;
     }
+    
+    Object type_spec____prime_type (Object s1) throws Exception
+    {
+        assert(s1 instanceof ParseTree.PrintStmt);
+        return s1;
+    }
+    Object printstmt____PRINT_expr_SEMI (Object s1) throws Exception
+    {
+        assert(s1 instanceof ParseTree.PrintStmt);
+        return s1;
+    }
     Object stmt____compoundstmt  (Object s1) throws Exception
     {
         assert(s1 instanceof ParseTree.CompoundStmt);
         return s1;
     }
 
-
+    Object ifstmt____IF_LPAREN_expr_RPAREN_stmt_ELSE_stmt(Object s1, Object s2, Object s3) throws Exception
+    {
+        // 1. check if ident.value_type matches with expr.value_type
+        // 2. etc.
+        // e. create and return node
+        Token          id     = (Token         )s1;
+        Token          assign = (Token         )s2;
+        ParseTree.Expr expr   = (ParseTree.Expr)s3;
+        Object id_type = env.Get(id.lexeme);
+        {   
+            if (id_type==null){throw new Exception("IDENT does not exist");}
+            // check if expr.type matches with id_type
+            if(id_type.equals("int") && expr.info.value_type=="int")
+                {
+                } // ok
+            else if (id_type.equals("bool") && expr.info.value_type=="bool")
+            {
+            }    
+            else
+            {
+                throw new Exception("semantic error  in assign statement");
+            }
+        }
+        ParseTree.AssignStmt stmt = new ParseTree.AssignStmt(id.lexeme, expr);
+        stmt.info.stmt = "assingment";
+        stmt.ident_reladdr = 1;
+        return stmt;
+    }
+    Object whilestmt____WHILE_LPAREN_expr_RPAREN_stmt(Object s1, Object s2) throws Exception
+    {
+        // 1. check if ident.value_type matches with expr.value_type
+        // 2. etc.
+        // e. create and return node
+        Token          id     = (Token         )s1;
+        Token          assign = (Token         )s2;
+        //ParseTree.Expr expr   = (ParseTree.Expr)s3;
+        Object id_type = env.Get(id.lexeme);
+        {   
+            if (id_type==null){throw new Exception("IDENT does not exist");}
+            // check if expr.type matches with id_type
+            if(id_type.equals("int") && expr.info.value_type=="int")
+                {
+                } // ok
+            else if (id_type.equals("bool") && expr.info.value_type=="bool")
+            {
+            }    
+            else
+            {
+                throw new Exception("semantic error  in assign statement");
+            }
+        }
+        ParseTree.AssignStmt stmt = new ParseTree.AssignStmt(id.lexeme, expr);
+        stmt.info.stmt = "assingment";
+        stmt.ident_reladdr = 1;
+        return stmt;
+    }
+    Object compoundstmt____BEGIN_localdecls_stmtlist_END(Object s1, Object s2) throws Exception
+    {
+        // 1. check if ident.value_type matches with expr.value_type
+        // 2. etc.
+        // e. create and return node
+        Token          id     = (Token         )s1;
+        Token          assign = (Token         )s2;
+        ParseTree.Expr expr   = (ParseTree.Expr)s3;
+        Object id_type = env.Get(id.lexeme);
+        {   
+            if (id_type==null){throw new Exception("IDENT does not exist");}
+            // check if expr.type matches with id_type
+            if(id_type.equals("int") && expr.info.value_type=="int")
+                {
+                } // ok
+            else if (id_type.equals("bool") && expr.info.value_type=="bool")
+            {
+            }    
+            else
+            {
+                throw new Exception("semantic error  in assign statement");
+            }
+        }
+        ParseTree.AssignStmt stmt = new ParseTree.AssignStmt(id.lexeme, expr);
+        stmt.info.stmt = "assingment";
+        stmt.ident_reladdr = 1;
+        return stmt;
+    }
+    
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -162,7 +276,7 @@ public class ParserImpl
             }
         }
         ParseTree.AssignStmt stmt = new ParseTree.AssignStmt(id.lexeme, expr);
-        stmt.info.stmt = "assign";
+        stmt.info.stmt = "assingment";
         stmt.ident_reladdr = 1;
         return stmt;
     }
@@ -199,6 +313,24 @@ public class ParserImpl
     Object args____eps() throws Exception
     {
         return new ArrayList<ParseTree.Expr>();
+    }
+    Object args____arglist(Object s1) throws Exception
+    {
+        return new ArrayList<ParseTree.Expr>();
+    }
+    Object arglist____expr(Object s1) throws Exception
+    {
+        return new ArrayList<ParseTree.Expr>();
+    }
+    Object arglist____arglist_arglist_COMMA_expr_(Object s1, Object s2) throws Exception
+    {
+        // 1. create and return node that has int type
+        Token token = (Token)s1;
+        int value = Integer.parseInt(token.lexeme);
+        ParseTree.ExprIntLit lit = new ParseTree.ExprIntLit(value);
+        lit.info.value_type = ("int"); 
+        lit.info.value = value;
+        return lit;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -412,7 +544,7 @@ public class ParserImpl
 
         return or;
     }
-    Object expr____NOT_expr(Object s1, Object s2, Object s3) throws Exception
+    Object expr____NOT_expr (Object s1, Object s2) throws Exception
     {
         // 1. check if expr1.value_type matches with the expr2.value_type
         // 2. etc.
@@ -479,7 +611,7 @@ public class ParserImpl
         }
         return new ParseTree.ExprCall(id.lexeme, args);
     }
-    Object expr____INTLIT(Object s1) throws Exception
+    Object expr____INT_LIT(Object s1) throws Exception
     {
         // 1. create and return node that has int type
         Token token = (Token)s1;
@@ -489,7 +621,7 @@ public class ParserImpl
         lit.info.value = value;
         return lit;
     }
-    Object expr____BOOLLIT(Object s1) throws Exception
+    Object expr____BOOL_LIT(Object s1) throws Exception
     {
         // 1. create and return node that has int type
         Token token = (Token)s1;
@@ -499,5 +631,25 @@ public class ParserImpl
         lit.info.value = value;
         return lit;
 
+    }
+    Object prime_type____INT(Object s1) throws Exception
+    {
+        // 1. create and return node that has int type
+        Token token = (Token)s1;
+        int value = Integer.parseInt(token.lexeme);
+        ParseTree.ExprIntLit lit = new ParseTree.ExprIntLit(value);
+        lit.info.value_type = ("int"); 
+        lit.info.value = value;
+        return lit;
+    }
+    Object prime_type____BOOL(Object s1) throws Exception
+    {
+        // 1. create and return node that has int type
+        Token token = (Token)s1;
+        boolean value = Boolean.parseBoolean(token.lexeme);
+        ParseTree.ExprBoolLit lit = new ParseTree.ExprBoolLit(value);
+        lit.info.value_type = ("bool"); 
+        lit.info.value = value;
+        return lit;
     }
 }

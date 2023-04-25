@@ -1,5 +1,5 @@
 java -jar jflex-1.6.1.jar Lexer.flex
-yacc.exe -Jthrows="Exception" -Jextends=ParserImpl -Jclass=Parser -Jnorun -J Parser.y
+./yacc.linux -Jthrows="Exception" -Jextends=ParserImpl -Jclass=Parser -Jnorun -J Parser.y
 
 javac *.java
 
