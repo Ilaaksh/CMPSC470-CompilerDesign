@@ -150,20 +150,17 @@ public class ParserImpl
         {   
             if (id_type==null){throw new Exception("IDENT does not exist");}
             // check if expr.type matches with id_type
-            if(id_type.equals("int")
-                && (expr instanceof ParseTree.ExprIntLit)
-                )
+            if(id_type.equals("int") && expr.info.value_type=="int")
                 {
 
                 } // ok
-            else if(id_type.equals("int")
-                && (expr instanceof ParseTree.ExprCall)
-                && (env.Get(((ParseTree.ExprCall)expr).ident).equals("func()->int"))
-                )
-            {} // ok
+            else if (id_type.equals("bool") && expr.info.value_type=="bool")
+            {
+
+            }    
             else
             {
-                throw new Exception("semantic error");
+                throw new Exception("semantic error  in assign statement");
             }
         }
         ParseTree.AssignStmt stmt = new ParseTree.AssignStmt(id.lexeme, expr);
