@@ -152,11 +152,9 @@ public class ParserImpl
             // check if expr.type matches with id_type
             if(id_type.equals("int") && expr.info.value_type=="int")
                 {
-
                 } // ok
             else if (id_type.equals("bool") && expr.info.value_type=="bool")
             {
-
             }    
             else
             {
@@ -164,6 +162,7 @@ public class ParserImpl
             }
         }
         ParseTree.AssignStmt stmt = new ParseTree.AssignStmt(id.lexeme, expr);
+        stmt.info.stmt = "assign";
         stmt.ident_reladdr = 1;
         return stmt;
     }

@@ -23,6 +23,7 @@ public class ParseTreeInfo
     }
     public static class StmtStmtInfo
     {
+        String stmt;
     }
     public static class ArgInfo
     {
