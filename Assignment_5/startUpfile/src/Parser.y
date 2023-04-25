@@ -139,8 +139,8 @@ expr            : expr ADD expr {Debug("expr -> expr ADD expr");                
                 | NOT expr {Debug("expr -> NOT expr");                                                                  $$ = expr____NOT_expr($1,$2);}
                 | LPAREN expr RPAREN {Debug("expr -> LPAREN expr RPAREN");                                              $$ = expr____LPAREN_expr_RPAREN($1,$2,$3);}
                 | IDENT {Debug("expr -> IDENT");                                                                        $$ = expr____IDENT($1);}
-                | INT_LIT {Debug("expr -> INT_LIT");                                                                    $$ = expr____INTLIT($1);}
-                | BOOL_LIT {Debug("expr -> BOOL_LIT");                                                                  $$ = expr____BOOLLIT($1);}
+                | INT_LIT {Debug("expr -> INT_LIT");                                                                    $$ = expr____INT_LIT($1);}
+                | BOOL_LIT {Debug("expr -> BOOL_LIT");                                                                  $$ = expr____BOOL_LIT($1);}
                 | CALL IDENT LPAREN args RPAREN {Debug("expr -> CALL IDENT LPAREN args RPAREN");                        $$ = expr____CALL_IDENT_LPAREN_args_RPAREN($2,$4);}
                 ;
 
@@ -163,9 +163,9 @@ expr            : expr ADD expr {Debug("expr -> expr ADD expr");                
 
 
     public void yyerror (String error) {
-            System.out.println ("Error message by Parser.yyerror() at near "  + lexer.GetLine()+":"+lexer.GetCol() +": " + error);
-            int last_token_lineno = lexer.GetLine();
-            int last_token_column = lexer.GetCol();
+            System.out.println ("Error message by Parser.yyerror() at near "  + lexer.getLine()+":"+lexer.getCol() +": " + error);
+            int last_token_lineno = lexer.getLine();
+            int last_token_column = lexer.getCol();
             //System.out.println ("Error message by Parser.yyerror() at near " + last_token_lineno+":"+last_token_column + ": " + error);
     }
 
