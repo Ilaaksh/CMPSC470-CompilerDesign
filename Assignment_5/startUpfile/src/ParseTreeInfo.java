@@ -29,5 +29,7 @@ public class ParseTreeInfo
     }
     public static class ExprInfo
     {
+        public String value_type;
+        public Object value;
     }
 }
