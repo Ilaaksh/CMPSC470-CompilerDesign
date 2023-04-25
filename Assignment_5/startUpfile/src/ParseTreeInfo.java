@@ -14,6 +14,7 @@ public class ParseTreeInfo
     }
     public static class FuncDeclInfo
     {
+        public String value_type;
     }
     public static class ParamInfo
     {
