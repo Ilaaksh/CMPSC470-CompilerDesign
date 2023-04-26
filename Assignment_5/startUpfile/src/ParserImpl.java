@@ -21,7 +21,7 @@ public class ParserImpl
     ParseTree.Program parsetree_program = null;
 
 
-    ////////////////////////////////////////////////////// ////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////// ////////////////////////////////////////////////////////---Done
 
     Object program____decllist(Object s1) throws Exception
     {
@@ -86,7 +86,7 @@ public class ParserImpl
     }
 
     
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////---
 
     Object fundecl____FUNC_IDENT_LPAREN_params_RPAREN_FUNCRET_primtype_BEGIN_localdecls_10X_stmtlist_END(Object s2, Object s4, Object s7, Object s9) throws Exception
     {
@@ -94,16 +94,19 @@ public class ParserImpl
         ArrayList<ParseTree.Param>       params     = (ArrayList<ParseTree.Param>      )s4;
         ParseTree.TypeSpec               rettype    = (ParseTree.TypeSpec              )s7;
         ArrayList<ParseTree.LocalDecl>   localdecls = (ArrayList<ParseTree.LocalDecl>  )s9;
+        ParseTreeInfo.FuncDeclInfo fun = new ParseTreeInfo.FuncDeclInfo();
+        fun.value_type=rettype.typename;
+        for(int j=0; j<params.size();j++){
+            fun.list_param+= params.get(j).ident+ " ";
+        }
         env.Put(id.lexeme, rettype);
-        ParseTree.FuncDecl funcdecl= new ParseTree.FuncDecl(id.lexeme, rettype, params, localdecls, null);
         for (int i = 0; i<localdecls.size();i++){
             ParseTree.LocalDecl dec = localdecls.get(i);
             env.Put(dec.ident, dec.typespec.typename);
         }
-    
+        
         ret_type = id.lexeme;
-        funcdecl.info.value_type=rettype.typename;
-        return funcdecl;
+        return null;
     }
     Object fundecl____FUNC_IDENT_LPAREN_params_RPAREN_FUNCRET_primtype_BEGIN_localdecls_X10_stmtlist_END(Object s2, Object s4, Object s7, Object s9, Object s11, Object s12) throws Exception
     {
@@ -144,10 +147,10 @@ public class ParserImpl
         ParseTree.Param    param = (ParseTree.Param)s1;
         return param;}
 
-
     Object paramlist____param(Object s1) throws Exception{
         ParseTree.Param              param = (ParseTree.Param)s1;
-        return param;}
+        return param;
+    }
 
     Object stmtlist____stmtlist_stmt(Object s1, Object s2) throws Exception
     {
