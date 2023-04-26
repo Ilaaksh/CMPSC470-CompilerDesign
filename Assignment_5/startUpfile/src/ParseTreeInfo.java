@@ -11,6 +11,7 @@ public class ParseTreeInfo
     }
     public static class ProgramInfo
     {
+        public String value_type;
     }
     public static class FuncDeclInfo
     {
@@ -21,10 +22,12 @@ public class ParseTreeInfo
     }
     public static class LocalDeclInfo
     {
+        public String value_type;
     }
     public static class StmtStmtInfo
     {
         String stmt;
+        public String value_type;
     }
     public static class ArgInfo
     {

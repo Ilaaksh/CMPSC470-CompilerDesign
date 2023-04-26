@@ -21,7 +21,7 @@ public class ParserImpl
     ParseTree.Program parsetree_program = null;
 
 
-    ////////////////////////////////////////////////////// Code Start ////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////// ////////////////////////////////////////////////////////
 
     Object program____decllist(Object s1) throws Exception
     {
@@ -29,10 +29,21 @@ public class ParserImpl
         // 2. assign the root, whose type is ParseTree.Program, to parsetree_program
         ArrayList<ParseTree.FuncDecl> decllist = (ArrayList<ParseTree.FuncDecl>)s1;
         parsetree_program = new ParseTree.Program(decllist);
+        boolean flag = false;
+        for (int i = 0; i<decllist.size();i++){
+            ParseTree.FuncDecl dec = decllist.get(i);
+            if(dec.info.value_type.equals("main")&& dec.info.value_type.equals("int")&& dec.params.size()==0){
+                flag=true;
 
-        if( env.Get("main") == null){
+            }
+        }
+        if (flag == false)
+        {
             throw new Exception("The program must have one main function that returns int type and has no parameters.");
         }
+        ///if( env.Get("main") == null){
+        ///    throw new Exception("The program must have one main function that returns int type and has no parameters.");}
+        parsetree_program = new ParseTree.Program(decllist);
         return parsetree_program;
     }
 
@@ -42,6 +53,7 @@ public class ParserImpl
     {
         ArrayList<ParseTree.FuncDecl> decllist = (ArrayList<ParseTree.FuncDecl>)s1;
         ParseTree.FuncDecl                decl = (ParseTree.FuncDecl           )s2;
+
 
         decllist.add(decl);
         return decllist;
@@ -73,6 +85,7 @@ public class ParserImpl
         return primtype;
     }
 
+    
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     Object fundecl____FUNC_IDENT_LPAREN_params_RPAREN_FUNCRET_primtype_BEGIN_localdecls_10X_stmtlist_END(Object s2, Object s4, Object s7, Object s9) throws Exception
@@ -83,6 +96,11 @@ public class ParserImpl
         ArrayList<ParseTree.LocalDecl>   localdecls = (ArrayList<ParseTree.LocalDecl>  )s9;
         env.Put(id.lexeme, rettype);
         ParseTree.FuncDecl funcdecl= new ParseTree.FuncDecl(id.lexeme, rettype, params, localdecls, null);
+        for (int i = 0; i<localdecls.size();i++){
+            ParseTree.LocalDecl dec = localdecls.get(i);
+            env.Put(dec.ident, dec.typespec.typename);
+        }
+    
         ret_type = id.lexeme;
         funcdecl.info.value_type=rettype.typename;
         return funcdecl;
@@ -122,18 +140,14 @@ public class ParserImpl
         param_list.add(param);
         return param_list;
     }
+    Object param____VAR_typespec_IDENT (Object s1,Object s2,Object s3) throws Exception{
+        ParseTree.Param    param = (ParseTree.Param)s1;
+        return param;}
+
 
     Object paramlist____param(Object s1) throws Exception{
         ParseTree.Param              param = (ParseTree.Param)s1;
-        return param;
-    }
-
-    Object param____VAR_typespec_IDENT(Object s1, Object s2, Object s3) throws Exception{
-        Token          id     = (Token         )s3;
-        Token          typeof = (Token         )s2;
-        ParseTree.TypeSpec type_spec   = (ParseTree.TypeSpec) s1;
-        return new ParseTree.Param(id.lexeme, type_spec);
-    }
+        return param;}
 
     Object stmtlist____stmtlist_stmt(Object s1, Object s2) throws Exception
     {
@@ -192,21 +206,22 @@ public class ParserImpl
         {   
             if (id_type==null){throw new Exception("IDENT does not exist");}
             // check if expr.type matches with id_type
-            if(id_type.equals("int") && expr.info.value_type=="int")
-                {
-                } // ok
-            else if (id_type.equals("bool") && expr.info.value_type=="bool")
+            if(id_type.equals("int") && expr.info.value_type.equals("int"))
+            {
+            } // ok
+            else if (id_type.equals("bool") && expr.info.value_type.equals("bool"))
             {
             }    
             else
             {
-                throw new Exception("semantic error  in assign statement");
+            throw new Exception("semantic error  in assign statement");
             }
+            ParseTree.AssignStmt as = new ParseTree.AssignStmt(id.lexeme, expr);
+            
+            as.ident_reladdr = 1;
+            return as;
+        
         }
-        ParseTree.AssignStmt stmt = new ParseTree.AssignStmt(id.lexeme, expr);
-        stmt.info.stmt = "assingment";
-        stmt.ident_reladdr = 1;
-        return stmt;
     }
     Object printnstmt____PRINT_expr_SEMI(Object s2) throws Exception
     {
@@ -224,8 +239,9 @@ public class ParserImpl
         // 3. create and return node
 
         ParseTree.Expr expr = (ParseTree.Expr)s2;
+        ParseTree.ReturnStmt ret = new ParseTree.ReturnStmt(expr);
         if(!ret_type.equals(expr.info.value_type)){
-            throw new Exception("[Error at "+expr.info+":"+expr.info+"] The type of returning value ("+expr.info.value_type+") should match with the return type ("+(((ParseTree.TypeSpec)env.Get(ret_type)).typename)+") of the function main().");
+            throw new Exception("[Error at  "+expr.info+" : "+expr.info+" ] The type of returning value ( "+expr.info.value_type+" ) should match with the return type ("+(((ParseTree.TypeSpec)env.Get(ret_type)).typename)+") of the function main().");
         }
 
         return new ParseTree.ReturnStmt(expr);
@@ -301,15 +317,15 @@ public class ParserImpl
     {
         // 1. check if expr1.value_type matches with the expr2.value_type
         // 2. etc.
-        // 3. create and return node that has value_type
+        // 3. create and return node that  args____eps() throws Exception
         ParseTree.Expr expr1 = (ParseTree.Expr)s1;
         Token          oper  = (Token         )s2;
         ParseTree.Expr expr2 = (ParseTree.Expr)s3;
         ParseTree.ExprAdd add = new ParseTree.ExprAdd(expr1, expr2);
-        if(!expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("int")){
+        if(expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("bool")){
             throw new Exception("expr1.value_type doesnt matches with the expr2.value_type ADD");
         }
-        add.info.value_type = ("bool");
+        add.info.value_type = ("int");
         return add;
     }
     Object expr____expr_SUB_expr(Object s1, Object s2, Object s3) throws Exception
@@ -322,10 +338,10 @@ public class ParserImpl
         ParseTree.Expr expr2 = (ParseTree.Expr)s3;
         // check if expr1.type matches with expr2.type
         ParseTree.ExprSub sub = new ParseTree.ExprSub(expr1, expr2);
-        if(!expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("int")){
+        if(expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("bool")){
             throw new Exception("expr1.value_type doesnt matches with the expr2.value_type SUB");
         }
-        sub.info.value_type = ("bool");
+        sub.info.value_type = ("int");
         return sub;
     }
     Object expr____expr_MUL_expr(Object s1, Object s2, Object s3) throws Exception
@@ -338,10 +354,10 @@ public class ParserImpl
         ParseTree.Expr expr2 = (ParseTree.Expr)s3;
         // check if expr1.type matches with expr2.type
         ParseTree.ExprMul mul = new ParseTree.ExprMul(expr1, expr2);
-        if(!expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("int")){
-            throw new Exception("expr1.value_type doesnt matches with the expr2.value_type MUL");
+        if(expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("bool")){
+            throw new Exception("[ERROR at ]"+"Cannot perform int * bool.");
         }
-        mul.info.value_type = ("bool");
+        mul.info.value_type = ("int");
         return mul;
     }
     Object expr____expr_DIV_expr(Object s1, Object s2, Object s3) throws Exception
@@ -354,10 +370,10 @@ public class ParserImpl
         ParseTree.Expr expr2 = (ParseTree.Expr)s3;
         // check if expr1.type matches with expr2.type
         ParseTree.ExprDiv div = new ParseTree.ExprDiv(expr1, expr2);
-        if(!expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("int")){
+        if(expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("bool")){
             throw new Exception("expr1.value_type doesnt matches with the expr2.value_type DIV");
         }
-        div.info.value_type = ("bool");
+        div.info.value_type = ("int");
         return div;
     }
     Object expr____expr_MOD_expr(Object s1, Object s2, Object s3) throws Exception
@@ -370,10 +386,10 @@ public class ParserImpl
         ParseTree.Expr expr2 = (ParseTree.Expr)s3;
         // check if expr1.type matches with expr2.type
         ParseTree.ExprMod mod = new ParseTree.ExprMod(expr1, expr2);
-        if(!expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("int")){
+        if(expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("bool")){
             throw new Exception("expr1.value_type doesnt matches with the expr2.value_type MOD");
         }
-        mod.info.value_type = ("bool");
+        mod.info.value_type = ("int");
         return mod;
     }
     
@@ -387,10 +403,10 @@ public class ParserImpl
         ParseTree.Expr expr2 = (ParseTree.Expr)s3;
         // check if expr1.type matches with expr2.type
         ParseTree.ExprEq eq = new ParseTree.ExprEq(expr1, expr2);
-        if(!expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("int")){
+        if(!expr1.info.value_type.equals("bool")|| !expr2.info.value_type.equals("bool")){
             throw new Exception("expr1.value_type doesnt matches with the expr2.value_type EQ");
         }
-        eq.info.value_type = ("bool");
+        eq.info.value_type = ("int");
         return eq;
     }
     Object expr____expr_NE_expr(Object s1, Object s2, Object s3) throws Exception
@@ -403,10 +419,10 @@ public class ParserImpl
         ParseTree.Expr expr2 = (ParseTree.Expr)s3;
         // check if expr1.type matches with expr2.type
         ParseTree.ExprNe ne = new ParseTree.ExprNe(expr1, expr2);
-        if(!expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("int")){
+        if(expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("bool")){
             throw new Exception("expr1.value_type doesnt matches with the expr2.value_type NE");
         }
-        ne.info.value_type = ("bool");
+        ne.info.value_type = ("int");
         return ne;
     }
     Object expr____expr_LE_expr(Object s1, Object s2, Object s3) throws Exception
@@ -419,10 +435,10 @@ public class ParserImpl
         ParseTree.Expr expr2 = (ParseTree.Expr)s3;
         // check if expr1.type matches with expr2.type
         ParseTree.ExprLe le = new ParseTree.ExprLe(expr1, expr2);
-        if(!expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("int")){
+        if(expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("bool")){
             throw new Exception("expr1.value_type doesnt matches with the expr2.value_type LE");
         }
-        le.info.value_type = ("bool");
+        le.info.value_type = ("int");
         return le;
     }
     Object expr____expr_LT_expr(Object s1, Object s2, Object s3) throws Exception
@@ -435,10 +451,10 @@ public class ParserImpl
         ParseTree.Expr expr2 = (ParseTree.Expr)s3;
         // check if expr1.type matches with expr2.type
         ParseTree.ExprLt lt = new ParseTree.ExprLt(expr1, expr2);
-        if(!expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("int")){
+        if(expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("bool")){
             throw new Exception("expr1.value_type doesnt matches with the expr2.value_type LT");
         }
-        lt.info.value_type = ("bool");
+        lt.info.value_type = ("int");
         return lt;
     }
     Object expr____expr_GE_expr(Object s1, Object s2, Object s3) throws Exception
@@ -451,10 +467,10 @@ public class ParserImpl
         ParseTree.Expr expr2 = (ParseTree.Expr)s3;
         // check if expr1.type matches with expr2.type
         ParseTree.ExprGe ge = new ParseTree.ExprGe(expr1, expr2);
-        if(!expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("int")){
+        if(expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("bool")){
             throw new Exception("expr1.value_type doesnt matches with the expr2.value_type GE");
         }
-        ge.info.value_type = ("bool");
+        ge.info.value_type = ("int");
         return ge;
     }
     Object expr____expr_GT_expr(Object s1, Object s2, Object s3) throws Exception
@@ -467,10 +483,10 @@ public class ParserImpl
         ParseTree.Expr expr2 = (ParseTree.Expr)s3;
         // check if expr1.type matches with expr2.type
         ParseTree.ExprGt gt = new ParseTree.ExprGt(expr1, expr2);
-        if(!expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("int")){
+        if(expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("bool")){
             throw new Exception("expr1.value_type doesnt matches with the expr2.value_type GT");
         }
-        gt.info.value_type = ("bool");
+        gt.info.value_type = ("int");
         return gt;
     }
     Object expr____expr_AND_expr(Object s1, Object s2, Object s3) throws Exception
@@ -483,10 +499,10 @@ public class ParserImpl
         ParseTree.Expr expr2 = (ParseTree.Expr)s3;
         // check if expr1.type matches with expr2.type
         ParseTree.ExprAnd and = new ParseTree.ExprAnd(expr1, expr2);
-        if(!expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("int")){
+        if(expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("bool")){
             throw new Exception("expr1.value_type doesnt matches with the expr2.value_type AND");
         }
-        and.info.value_type = ("bool");
+        and.info.value_type = ("int");
         return and;
     }
     Object expr____expr_OR_expr(Object s1, Object s2, Object s3) throws Exception
@@ -499,10 +515,10 @@ public class ParserImpl
         ParseTree.Expr expr2 = (ParseTree.Expr)s3;
         // check if expr1.type matches with expr2.type
         ParseTree.ExprOr or = new ParseTree.ExprOr(expr1, expr2);
-        if(!expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("int")){
+        if(expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("bool")){
             throw new Exception("expr1.value_type doesnt matches with the expr2.value_type OR");
         }
-        or.info.value_type = ("bool");
+        or.info.value_type = ("int");
 
         return or;
     }
@@ -515,10 +531,10 @@ public class ParserImpl
         Token          oper  = (Token         )s2;
         // check if expr1.type matches with expr2.type
         ParseTree.ExprNot not = new ParseTree.ExprNot(expr1);
-        if (!expr1.info.value_type.equals("bool")){
+        if (expr1.info.value_type.equals("bool")){
             throw new Exception("expr1.value_type doesnt matches with the expr2.value_type NOT");
         }
-        not.info.value_type = ("bool");
+        not.info.value_type = ("int");
         return not;
     }
     Object expr____LPAREN_expr_RPAREN(Object s1, Object s2, Object s3) throws Exception
