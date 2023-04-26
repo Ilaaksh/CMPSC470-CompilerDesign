@@ -125,7 +125,7 @@ public class ParserImpl
     }
 
 
-    //params
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////PARAMS
     Object params____paramlist(Object s1) throws Exception
     {
         return s1;
@@ -167,32 +167,32 @@ public class ParserImpl
     Object stmt____assignstmt  (Object s1) throws Exception
     {
         assert(s1 instanceof ParseTree.AssignStmt);
-        return s1;
+        return (ParseTree.AssignStmt)s1;
     }
     Object stmt____printstmt  (Object s1) throws Exception
     {
         assert(s1 instanceof ParseTree.PrintStmt);
-        return s1;
+        return (ParseTree.PrintStmt)s1;
     }
     Object stmt____returnstmt  (Object s1) throws Exception
     {
         assert(s1 instanceof ParseTree.ReturnStmt);
-        return s1;
+        return (ParseTree.ReturnStmt)s1;
     }
     Object stmt____ifstmt  (Object s1) throws Exception
     {
         assert(s1 instanceof ParseTree.IfStmt);
-        return s1;
+        return (ParseTree.IfStmt)s1;
     }
     Object stmt____whilestmt  (Object s1) throws Exception
     {
         assert(s1 instanceof ParseTree.WhileStmt);
-        return s1;
+        return (ParseTree.ReturnStmt)s1;
     }
     Object stmt____compoundstmt  (Object s1) throws Exception
     {
         assert(s1 instanceof ParseTree.CompoundStmt);
-        return s1;
+        return (ParseTree.CompoundStmt)s1;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -358,7 +358,7 @@ public class ParserImpl
         // check if expr1.type matches with expr2.type
         ParseTree.ExprMul mul = new ParseTree.ExprMul(expr1, expr2);
         if(expr1.info.value_type.equals("bool")|| expr2.info.value_type.equals("bool")){
-            throw new Exception("[ERROR at ]"+"Cannot perform int * bool.");
+            throw new Exception("[ERROR at : ]"+"Cannot perform int * bool.");
         }
         mul.info.value_type = ("int");
         return mul;
