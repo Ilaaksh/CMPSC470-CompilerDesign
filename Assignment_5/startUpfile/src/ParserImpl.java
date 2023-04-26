@@ -136,10 +136,10 @@ public class ParserImpl
         return new ArrayList<ParseTree.Param>();
     }
 
-    Object paramlist____paramlist_COMMA_param(Object s1, Object s2, Object s3) throws Exception{
+    Object paramlist____paramlist_COMMA_param(Object s1, Object s3) throws Exception{
 
         ArrayList<ParseTree.Param> param_list = (ArrayList<ParseTree.Param>)s1;
-        ParseTree.Param            param    = (ParseTree.Param           )s2;
+        ParseTree.Param            param    = (ParseTree.Param           )s3;
         param_list.add(param);
         return param_list;
     }

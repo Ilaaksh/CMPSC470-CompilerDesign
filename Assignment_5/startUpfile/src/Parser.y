@@ -63,7 +63,7 @@ params          : param_list {Debug("params -> param_list");                    
 		        | {Debug("params -> eps");                                                                              $$ = params____eps();}
                 ;
 
-param_list      :  param_list  COMMA  param   {Debug("param_list -> param_list  COMMA  param");                         $$ = paramlist____paramlist_COMMA_param($1, $2, $3);}
+param_list      :  param_list  COMMA  param   {Debug("param_list -> param_list  COMMA  param");                         $$ = paramlist____paramlist_COMMA_param($1, $3);}
                 |  param                      {Debug("param_list     -> param");                                        $$ = paramlist____param($1); };
 
 param           : VAR type_spec IDENT {Debug("param -> VAR type_spec IDENT");                                           $$ = param____VAR_typespec_IDENT($1,$2,$3);}
