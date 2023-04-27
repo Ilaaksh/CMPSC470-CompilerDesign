@@ -1,0 +1,18 @@
+Success: no semantic error is found.
+
+================================================================================
+Code with indentations:
+func main() -> int
+{
+    return 0;
+}
+================================================================================
+Code with indentations and comments for running environment:
+func main() -> int
+{
+    return 0;
+}
+================================================================================
+Execute:
+Returned value by main: 0
+================================================================================

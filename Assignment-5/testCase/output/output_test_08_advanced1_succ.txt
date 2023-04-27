@@ -1,0 +1,66 @@
+Success: no semantic error is found.
+
+================================================================================
+Code with indentations:
+func div( var int a, var int b ) -> int
+{
+    var int c;
+    if( a < b )
+        c <- 0;
+    else
+        c <- call div( a - b, b ) + 1;
+    return c;
+}
+func mod( var int a, var int b ) -> int
+{
+    var int c;
+    if( a < b )
+        c <- a;
+    else
+        c <- call mod( a - b, b );
+    return c;
+}
+func main() -> int
+{
+    var int c;
+    print call div( 123, 5 );
+    print call mod( 123, 5 );
+    return 0;
+}
+================================================================================
+Code with indentations and comments for running environment:
+func div( var int a, var int b ) -> int
+## relative address of parameter a from this func call base pointer is -1
+## relative address of parameter b from this func call base pointer is -2
+{
+    var int c; ## relative address of local variable c from this func call base pointer is 1
+    if( a[-1] < b[-2] )
+        c[1] <- 0;
+    else
+        c[1] <- call div( a[-1] - b[-2], b[-2] ) + 1;
+    return c[1];
+}
+func mod( var int a, var int b ) -> int
+## relative address of parameter a from this func call base pointer is -1
+## relative address of parameter b from this func call base pointer is -2
+{
+    var int c; ## relative address of local variable c from this func call base pointer is 1
+    if( a[-1] < b[-2] )
+        c[1] <- a[-1];
+    else
+        c[1] <- call mod( a[-1] - b[-2], b[-2] );
+    return c[1];
+}
+func main() -> int
+{
+    var int c; ## relative address of local variable c from this func call base pointer is 1
+    print call div( 123, 5 );
+    print call mod( 123, 5 );
+    return 0;
+}
+================================================================================
+Execute:
+24
+3
+Returned value by main: 0
+================================================================================

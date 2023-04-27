@@ -1,0 +1,35 @@
+Success: no semantic error is found.
+
+================================================================================
+Code with indentations:
+func main() -> int
+{
+    var int x;
+    var int y;
+    var bool z;
+    x <- 0;
+    x <- x + 1;
+    y <- 10 * 21 + 35 / (41 - 53);
+    z <- not true and 1 < 3 and y >= 42 or true = (x < 2);
+    print z;
+    return y;
+}
+================================================================================
+Code with indentations and comments for running environment:
+func main() -> int
+{
+    var int x; ## relative address of local variable x from this func call base pointer is 1
+    var int y; ## relative address of local variable y from this func call base pointer is 2
+    var bool z; ## relative address of local variable z from this func call base pointer is 3
+    x[1] <- 0;
+    x[1] <- x[1] + 1;
+    y[2] <- 10 * 21 + 35 / (41 - 53);
+    z[3] <- not true and 1 < 3 and y[2] >= 42 or true = (x[1] < 2);
+    print z[3];
+    return y[2];
+}
+================================================================================
+Execute:
+true
+Returned value by main: 208
+================================================================================

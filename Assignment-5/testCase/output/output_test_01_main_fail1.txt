@@ -1,0 +1,2 @@
+Error: there is semantic error(s).
+The program must have one main function that returns int type and has no parameters.

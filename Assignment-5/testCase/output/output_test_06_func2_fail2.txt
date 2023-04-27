@@ -1,0 +1,2 @@
+Error: there is semantic error(s).
+[Error at 8:10] Cannot pass the incorrect number of arguments to Func().

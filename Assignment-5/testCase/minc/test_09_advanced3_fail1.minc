@@ -1,0 +1,22 @@
+func Fib (var int  n)->int
+{
+    if (n < 0)
+        return 0;
+    else {
+        if ( n = 0 
+        )
+            return 0;
+        else
+            return call Fib(n-1 + call Fib(n-2));
+    }
+}
+
+func main(var bool n)->int
+{
+    var int fib ;
+
+    fib <- call Fib(n);
+    print fib;
+
+    return 0;
+}

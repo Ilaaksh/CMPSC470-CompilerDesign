@@ -1,0 +1,2 @@
+Error: there is semantic error(s).
+[Error at 4:10] Cannot use an undefined function Func().

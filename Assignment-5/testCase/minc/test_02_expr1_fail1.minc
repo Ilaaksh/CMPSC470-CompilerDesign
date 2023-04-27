@@ -1,0 +1,9 @@
+func main()->int
+{
+    var int x;
+    var int y;
+    var bool z;
+    x <- x + 1;
+    y <- 11 * false + 35 / (41 - 53);
+    z <- true and 1 < 3;
+}

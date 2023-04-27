@@ -1,0 +1,2 @@
+Error: there is semantic error(s).
+[Error at 7:13] Cannot perform int * bool.

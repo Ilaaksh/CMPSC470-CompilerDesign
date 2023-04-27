@@ -1,0 +1,2 @@
+Error: there is semantic error(s).
+[Error at 15:21] The 1st argument of the function mul() should be int type.

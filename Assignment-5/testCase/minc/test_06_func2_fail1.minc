@@ -1,0 +1,10 @@
+func Func(var int a, var int b , var bool c)->int
+{
+    return 0;
+}
+func main()->int
+{
+    var int x;
+    x <- call Func(1, 2, 1);
+    return 0;
+}

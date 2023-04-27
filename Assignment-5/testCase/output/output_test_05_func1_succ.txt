@@ -1,0 +1,33 @@
+Success: no semantic error is found.
+
+================================================================================
+Code with indentations:
+func Func() -> int
+{
+    return 0;
+}
+func main() -> int
+{
+    var bool b;
+    b <- (call Func() = 0);
+    print b;
+    return 10;
+}
+================================================================================
+Code with indentations and comments for running environment:
+func Func() -> int
+{
+    return 0;
+}
+func main() -> int
+{
+    var bool b; ## relative address of local variable b from this func call base pointer is 1
+    b[1] <- (call Func() = 0);
+    print b[1];
+    return 10;
+}
+================================================================================
+Execute:
+true
+Returned value by main: 10
+================================================================================

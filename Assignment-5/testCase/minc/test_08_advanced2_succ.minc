@@ -1,0 +1,40 @@
+func GCD(var int a , var int b)->int
+{
+    var int gcd;
+
+    if (a = 0 or b = 0 )
+    {
+        if (a = 0 )
+            gcd <- b;
+        else
+            gcd <- a;
+    } else {
+        {
+            var int mod;
+            if ( a > b ) 
+                gcd <- call GCD( a - b, b );
+            else
+                gcd <- call GCD( b - a, a );
+        }
+    }
+    return gcd;
+}
+
+func main()->int
+{
+    var int gcd;
+
+    gcd <- call GCD(12, 4);
+    print gcd;
+
+    gcd <- call GCD(4, 12);
+    print gcd;
+
+    gcd <- call GCD(4, 7);
+    print gcd;
+
+    gcd <- call GCD(2*3*5*17*17, 17*4*9*10);
+    print gcd;
+
+    return gcd;
+}

@@ -1,0 +1,4 @@
+func nomain()->int
+{
+    return 0;
+}

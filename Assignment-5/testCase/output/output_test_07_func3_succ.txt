@@ -1,0 +1,51 @@
+Success: no semantic error is found.
+
+================================================================================
+Code with indentations:
+func mul( var int a, var int b ) -> int
+{
+    if( b = 0 )
+        return 0;
+    else
+        {
+            if( b < 0 )
+                return call mul( a, b + 1 ) - a;
+            else
+                return call mul( a, b - 1 ) + a;
+        }
+}
+func main() -> int
+{
+    var int x;
+    x <- call mul( 5, 5 );
+    print x;
+    return x;
+}
+================================================================================
+Code with indentations and comments for running environment:
+func mul( var int a, var int b ) -> int
+## relative address of parameter a from this func call base pointer is -1
+## relative address of parameter b from this func call base pointer is -2
+{
+    if( b[-2] = 0 )
+        return 0;
+    else
+        {
+            if( b[-2] < 0 )
+                return call mul( a[-1], b[-2] + 1 ) - a[-1];
+            else
+                return call mul( a[-1], b[-2] - 1 ) + a[-1];
+        }
+}
+func main() -> int
+{
+    var int x; ## relative address of local variable x from this func call base pointer is 1
+    x[1] <- call mul( 5, 5 );
+    print x[1];
+    return x[1];
+}
+================================================================================
+Execute:
+25
+Returned value by main: 25
+================================================================================
