@@ -1,2 +1,0 @@
-Error: there is semantic error(s).
-[Error at 23:9] Use bool value to the check condition in if statement.

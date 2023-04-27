@@ -1,7 +1,0 @@
-func Func()->int ## does not return
-{
-}
-func main()->int
-{
-    return 0;
-}

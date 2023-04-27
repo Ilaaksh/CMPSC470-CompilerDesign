@@ -1,2 +1,0 @@
-Error: there is semantic error(s).
-[Error at 18:12] Use bool value to the check condition in while statement.

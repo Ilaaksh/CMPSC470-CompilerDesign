@@ -1,2 +1,0 @@
-Error: there is semantic error(s).
-[Error at 8:15] Cannot perform bool + int.

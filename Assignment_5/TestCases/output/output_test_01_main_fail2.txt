@@ -1,2 +1,0 @@
-Error: there is semantic error(s).
-[Error at 3:12] The type of returning value (int) should match with the return type (bool) of the function main().

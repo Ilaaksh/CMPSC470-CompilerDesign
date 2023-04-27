@@ -1,3 +1,0 @@
-Error message by Parser.yyerror() at near 9:27: syntax error
-Error message by Parser.yyerror() at near 9:27: stack underflow. aborting...
-Error: there is syntax error(s).

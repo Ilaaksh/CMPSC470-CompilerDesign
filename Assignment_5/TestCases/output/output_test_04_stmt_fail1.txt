@@ -1,2 +1,0 @@
-Error: there is semantic error(s).
-[Error at 16:7] Cannot assign int value to bool variable e.

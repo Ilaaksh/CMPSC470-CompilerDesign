@@ -1,2 +1,0 @@
-Error: there is semantic error(s).
-[Error at 4:5] The identifier la is already defined.

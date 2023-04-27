@@ -1,4 +1,0 @@
-func main  ( ) -> bool
-{
-    return 12;
-}
