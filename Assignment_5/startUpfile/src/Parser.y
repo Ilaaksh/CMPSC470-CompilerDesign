@@ -56,7 +56,8 @@ decl_list       : decl_list decl {Debug("decl_list -> decl_list decl");         
 decl            : fun_decl {Debug("decl -> fun_decl");                                                                  $$ = decl____fundecl($1);}
                 ;
 
-fun_decl        : FUNC IDENT LPAREN params RPAREN FUNCRET prim_type BEGIN local_decls{Debug("fun_decl -> FUNC ID(params)->prim_type BEGIN local_decls");            $<obj>$ = fundecl____FUNC_IDENT_LPAREN_params_RPAREN_FUNCRET_primtype_BEGIN_localdecls_10X_stmtlist_END($2, $4, $7, $9); } stmt_list END{Debug("stmt_list END"); $$ = fundecl____FUNC_IDENT_LPAREN_params_RPAREN_FUNCRET_primtype_BEGIN_localdecls_X10_stmtlist_END($2, $4, $7, $9, $11, $12); }
+fun_decl        : FUNC IDENT LPAREN params RPAREN FUNCRET prim_type BEGIN local_decls{Debug("fun_decl -> FUNC ID(params)->prim_type BEGIN local_decls");            $<obj>$ = fundecl____FUNC_IDENT_LPAREN_params_RPAREN_FUNCRET_primtype_BEGIN_localdecls_10X_stmtlist_END($1,$2, $4, $7, $9); } stmt_list END{Debug("stmt_list END"); 
+                    $$ = fundecl____FUNC_IDENT_LPAREN_params_RPAREN_FUNCRET_primtype_BEGIN_localdecls_X10_stmtlist_END($2, $4, $7, $9, $11, $12); }
                 ;
 
 params          : param_list {Debug("params -> param_list");                                                            $$ = params____paramlist($1);  }
@@ -80,7 +81,7 @@ local_decls     : local_decls  local_decl {Debug("local_decls -> local_decls  lo
                 | {Debug("local_decls -> eps");                                                                         $$ = localdecls____eps();}
                 ;
 
-local_decl      : VAR type_spec IDENT SEMI {Debug("local_decl -> VAR type_spec IDENT SEMI");                            $$ = localdecl____VAR_typespec_IDENT_SEMI($2,$3);}
+local_decl      : VAR type_spec IDENT SEMI {Debug("local_decl -> VAR type_spec IDENT SEMI");                            $$ = localdecl____VAR_typespec_IDENT_SEMI($1,$2,$3);}
                 ;
 
 stmt_list       : stmt_list stmt {Debug("stmt_list -> stmt_list stmt");                                                 $$ = stmtlist____stmtlist_stmt($1,$2);}
@@ -141,11 +142,11 @@ expr            : expr ADD expr {Debug("expr -> expr ADD expr");                
                 | IDENT {Debug("expr -> IDENT");                                                                        $$ = expr____IDENT($1);}
                 | INT_LIT {Debug("expr -> INT_LIT");                                                                    $$ = expr____INT_LIT($1);}
                 | BOOL_LIT {Debug("expr -> BOOL_LIT");                                                                  $$ = expr____BOOL_LIT($1);}
-                | CALL IDENT LPAREN args RPAREN {Debug("expr -> CALL IDENT LPAREN args RPAREN");                        $$ = expr____CALL_IDENT_LPAREN_args_RPAREN($2,$4);}
+                | CALL IDENT LPAREN args RPAREN {Debug("expr -> CALL IDENT LPAREN args RPAREN");                        $$ = expr____CALL_IDENT_LPAREN_args_RPAREN($1,$2,$4);}
                 ;
 
 %%
-    private Lexer lexer;
+private Lexer lexer;
     private Token last_token;
 
     private int yylex () {
@@ -154,6 +155,8 @@ expr            : expr ADD expr {Debug("expr -> expr ADD expr");                
             yylval = new ParserVal(0);
             yyl_return = lexer.yylex();
             last_token = (Token)yylval.obj;
+            String my_text = lexer.yytext();
+            //System.out.println("my_text: " + my_text);
         }
         catch (IOException e) {
             System.out.println("IO error :"+e);
@@ -163,10 +166,10 @@ expr            : expr ADD expr {Debug("expr -> expr ADD expr");                
 
 
     public void yyerror (String error) {
-            System.out.println ("Error message by Parser.yyerror() at near "  + lexer.getLine()+":"+lexer.getCol() +": " + error);
-            int last_token_lineno = lexer.getLine();
-            int last_token_column = lexer.getCol();
-            //System.out.println ("Error message by Parser.yyerror() at near " + last_token_lineno+":"+last_token_column + ": " + error);
+        //System.out.println ("Error message for " + lexer.lineno+":"+lexer.column +" by Parser.yyerror(): " + error);
+        int last_token_lineno = 0;
+        int last_token_column = 0;
+        System.out.println ("Error message by Parser.yyerror() at near " + lexer.lineno + ":" + lexer.column + ": " + error);
     }
 
 

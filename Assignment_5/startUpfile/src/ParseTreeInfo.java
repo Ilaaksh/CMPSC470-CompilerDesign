@@ -16,7 +16,9 @@ public class ParseTreeInfo
     public static class FuncDeclInfo
     {
         public String value_type;
-        public String list_param;
+        public String returntype;
+        public ArrayList<ParseTree.Param> params;
+        public String id;
     }
     public static class ParamInfo
     {
@@ -24,11 +26,14 @@ public class ParseTreeInfo
     public static class LocalDeclInfo
     {
         public String value_type;
+        public int lineno;
+        public int column;
     }
     public static class StmtStmtInfo
     {
         String stmt;
         public String value_type;
+        public boolean hasReturn = false;
     }
     public static class ArgInfo
     {
@@ -37,5 +42,7 @@ public class ParseTreeInfo
     {
         public String value_type;
         public Object value;
+        public int lineno;
+        public int column;
     }
 }

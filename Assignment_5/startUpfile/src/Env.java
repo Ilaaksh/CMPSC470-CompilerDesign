@@ -35,4 +35,8 @@ public class Env
 
         return t1.get(name);
     }
+    public Object GetCurrentScope(String name) {
+        Env env = this;
+        return env.vars.get(name);
+    }
 }
